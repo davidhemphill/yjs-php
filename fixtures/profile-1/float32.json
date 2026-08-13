@@ -1,0 +1,85 @@
+{
+  "writer": "writeFloat32",
+  "cases": [
+    {
+      "name": "float32/zero",
+      "value": {
+        "t": "double",
+        "bits": "0000000000000000"
+      },
+      "bytes": "AAAAAA=="
+    },
+    {
+      "name": "float32/negative-zero",
+      "value": {
+        "t": "double",
+        "bits": "8000000000000000"
+      },
+      "bytes": "gAAAAA=="
+    },
+    {
+      "name": "float32/one",
+      "value": {
+        "t": "double",
+        "bits": "3ff0000000000000"
+      },
+      "bytes": "P4AAAA=="
+    },
+    {
+      "name": "float32/negative-one",
+      "value": {
+        "t": "double",
+        "bits": "bff0000000000000"
+      },
+      "bytes": "v4AAAA=="
+    },
+    {
+      "name": "float32/half",
+      "value": {
+        "t": "double",
+        "bits": "3fe0000000000000"
+      },
+      "bytes": "PwAAAA=="
+    },
+    {
+      "name": "float32/largest",
+      "value": {
+        "t": "double",
+        "bits": "47efffffe0000000"
+      },
+      "bytes": "f3///w=="
+    },
+    {
+      "name": "float32/smallest-normal",
+      "value": {
+        "t": "double",
+        "bits": "3810000000000000"
+      },
+      "bytes": "AIAAAA=="
+    },
+    {
+      "name": "float32/infinity",
+      "value": {
+        "t": "double",
+        "bits": "7ff0000000000000"
+      },
+      "bytes": "f4AAAA=="
+    },
+    {
+      "name": "float32/negative-infinity",
+      "value": {
+        "t": "double",
+        "bits": "fff0000000000000"
+      },
+      "bytes": "/4AAAA=="
+    },
+    {
+      "name": "float32/nan",
+      "value": {
+        "t": "double",
+        "bits": "7ff8000000000000"
+      },
+      "bytes": "f8AAAA=="
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "writer": "writeBigInt64",
+  "cases": [
+    {
+      "name": "bigInt64/zero",
+      "value": {
+        "t": "bigint",
+        "v": "0"
+      },
+      "bytes": "AAAAAAAAAAA="
+    },
+    {
+      "name": "bigInt64/one",
+      "value": {
+        "t": "bigint",
+        "v": "1"
+      },
+      "bytes": "AAAAAAAAAAE="
+    },
+    {
+      "name": "bigInt64/negative-one",
+      "value": {
+        "t": "bigint",
+        "v": "-1"
+      },
+      "bytes": "//////////8="
+    },
+    {
+      "name": "bigInt64/max-safe-integer",
+      "value": {
+        "t": "bigint",
+        "v": "9007199254740991"
+      },
+      "bytes": "AB////////8="
+    },
+    {
+      "name": "bigInt64/beyond-safe-integer",
+      "value": {
+        "t": "bigint",
+        "v": "9007199254740993"
+      },
+      "bytes": "ACAAAAAAAAE="
+    },
+    {
+      "name": "bigInt64/int64-max",
+      "value": {
+        "t": "bigint",
+        "v": "9223372036854775807"
+      },
+      "bytes": "f/////////8="
+    },
+    {
+      "name": "bigInt64/int64-min",
+      "value": {
+        "t": "bigint",
+        "v": "-9223372036854775808"
+      },
+      "bytes": "gAAAAAAAAAA="
+    }
+  ]
+}

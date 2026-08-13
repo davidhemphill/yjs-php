@@ -1,0 +1,9 @@
+{
+  "profile": 1,
+  "description": "Package versions the committed fixtures were generated from. CI regenerates against these exact versions and fails on any diff.",
+  "packages": {
+    "lib0": "0.2.117",
+    "yjs": "13.6.29",
+    "y-protocols": "1.0.7"
+  }
+}

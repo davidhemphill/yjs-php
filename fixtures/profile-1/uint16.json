@@ -1,0 +1,53 @@
+{
+  "writer": "writeUint16",
+  "cases": [
+    {
+      "name": "uint16/0",
+      "value": {
+        "t": "int",
+        "v": "0"
+      },
+      "bytes": "AAA="
+    },
+    {
+      "name": "uint16/1",
+      "value": {
+        "t": "int",
+        "v": "1"
+      },
+      "bytes": "AQA="
+    },
+    {
+      "name": "uint16/255",
+      "value": {
+        "t": "int",
+        "v": "255"
+      },
+      "bytes": "/wA="
+    },
+    {
+      "name": "uint16/256",
+      "value": {
+        "t": "int",
+        "v": "256"
+      },
+      "bytes": "AAE="
+    },
+    {
+      "name": "uint16/4660",
+      "value": {
+        "t": "int",
+        "v": "4660"
+      },
+      "bytes": "NBI="
+    },
+    {
+      "name": "uint16/65535",
+      "value": {
+        "t": "int",
+        "v": "65535"
+      },
+      "bytes": "//8="
+    }
+  ]
+}

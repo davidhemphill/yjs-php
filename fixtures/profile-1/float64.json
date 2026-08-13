@@ -1,0 +1,101 @@
+{
+  "writer": "writeFloat64",
+  "cases": [
+    {
+      "name": "float64/zero",
+      "value": {
+        "t": "double",
+        "bits": "0000000000000000"
+      },
+      "bytes": "AAAAAAAAAAA="
+    },
+    {
+      "name": "float64/negative-zero",
+      "value": {
+        "t": "double",
+        "bits": "8000000000000000"
+      },
+      "bytes": "gAAAAAAAAAA="
+    },
+    {
+      "name": "float64/one",
+      "value": {
+        "t": "double",
+        "bits": "3ff0000000000000"
+      },
+      "bytes": "P/AAAAAAAAA="
+    },
+    {
+      "name": "float64/pi",
+      "value": {
+        "t": "double",
+        "bits": "400921fb54442d18"
+      },
+      "bytes": "QAkh+1RELRg="
+    },
+    {
+      "name": "float64/tenth",
+      "value": {
+        "t": "double",
+        "bits": "3fb999999999999a"
+      },
+      "bytes": "P7mZmZmZmZo="
+    },
+    {
+      "name": "float64/epsilon",
+      "value": {
+        "t": "double",
+        "bits": "3cb0000000000000"
+      },
+      "bytes": "PLAAAAAAAAA="
+    },
+    {
+      "name": "float64/max",
+      "value": {
+        "t": "double",
+        "bits": "7fefffffffffffff"
+      },
+      "bytes": "f+////////8="
+    },
+    {
+      "name": "float64/min-subnormal",
+      "value": {
+        "t": "double",
+        "bits": "0000000000000001"
+      },
+      "bytes": "AAAAAAAAAAE="
+    },
+    {
+      "name": "float64/infinity",
+      "value": {
+        "t": "double",
+        "bits": "7ff0000000000000"
+      },
+      "bytes": "f/AAAAAAAAA="
+    },
+    {
+      "name": "float64/negative-infinity",
+      "value": {
+        "t": "double",
+        "bits": "fff0000000000000"
+      },
+      "bytes": "//AAAAAAAAA="
+    },
+    {
+      "name": "float64/nan",
+      "value": {
+        "t": "double",
+        "bits": "7ff8000000000000"
+      },
+      "bytes": "f/gAAAAAAAA="
+    },
+    {
+      "name": "float64/beyond-safe-integer",
+      "value": {
+        "t": "double",
+        "bits": "43b0000000000000"
+      },
+      "bytes": "Q7AAAAAAAAA="
+    }
+  ]
+}

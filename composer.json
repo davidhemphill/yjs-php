@@ -1,0 +1,51 @@
+{
+    "name": "davidhemphill/yjs-php",
+    "description": "A pure-PHP implementation of the Yjs V1 binary update format and the lib0 primitives it is built on.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "yjs",
+        "crdt",
+        "lib0",
+        "collaboration"
+    ],
+    "require": {
+        "php": "^8.4"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.24",
+        "pestphp/pest": "^4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Yjs\\": "src/"
+        },
+        "files": [
+            "src/bootstrap.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Yjs\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "lint": "pint --parallel",
+        "test:lint": "pint --parallel --test",
+        "test:unit": "pest",
+        "test": [
+            "@test:lint",
+            "@test:unit"
+        ],
+        "fixtures": "node tools/oracle/generate-fixtures.mjs",
+        "fixtures:verify": "node tools/oracle/verify-php-output.mjs"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

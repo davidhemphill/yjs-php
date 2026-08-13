@@ -1,0 +1,175 @@
+{
+  "writer": "writeVarString",
+  "cases": [
+    {
+      "name": "varString/empty",
+      "value": {
+        "t": "string",
+        "v": ""
+      },
+      "bytes": "AA==",
+      "utf16Length": 0,
+      "utf8Length": 0
+    },
+    {
+      "name": "varString/ascii",
+      "value": {
+        "t": "string",
+        "v": "hello world"
+      },
+      "bytes": "C2hlbGxvIHdvcmxk",
+      "utf16Length": 11,
+      "utf8Length": 11
+    },
+    {
+      "name": "varString/latin1",
+      "value": {
+        "t": "string",
+        "v": "naïve café"
+      },
+      "bytes": "DG5hw692ZSBjYWbDqQ==",
+      "utf16Length": 10,
+      "utf8Length": 12
+    },
+    {
+      "name": "varString/two-byte",
+      "value": {
+        "t": "string",
+        "v": "Привет"
+      },
+      "bytes": "DNCf0YDQuNCy0LXRgg==",
+      "utf16Length": 6,
+      "utf8Length": 12
+    },
+    {
+      "name": "varString/three-byte",
+      "value": {
+        "t": "string",
+        "v": "日本語のテキスト"
+      },
+      "bytes": "GOaXpeacrOiqnuOBruODhuOCreOCueODiA==",
+      "utf16Length": 8,
+      "utf8Length": 24
+    },
+    {
+      "name": "varString/four-byte-emoji",
+      "value": {
+        "t": "string",
+        "v": "😀"
+      },
+      "bytes": "BPCfmIA=",
+      "utf16Length": 2,
+      "utf8Length": 4
+    },
+    {
+      "name": "varString/emoji-run",
+      "value": {
+        "t": "string",
+        "v": "😀😃😄😁"
+      },
+      "bytes": "EPCfmIDwn5iD8J+YhPCfmIE=",
+      "utf16Length": 8,
+      "utf8Length": 16
+    },
+    {
+      "name": "varString/combining-marks",
+      "value": {
+        "t": "string",
+        "v": "éà"
+      },
+      "bytes": "BmXMgWHMgA==",
+      "utf16Length": 4,
+      "utf8Length": 6
+    },
+    {
+      "name": "varString/zwj-family",
+      "value": {
+        "t": "string",
+        "v": "👨‍👩‍👧‍👦"
+      },
+      "bytes": "GfCfkajigI3wn5Gp4oCN8J+Rp+KAjfCfkaY=",
+      "utf16Length": 11,
+      "utf8Length": 25
+    },
+    {
+      "name": "varString/flag-sequence",
+      "value": {
+        "t": "string",
+        "v": "🇯🇵"
+      },
+      "bytes": "CPCfh6/wn4e1",
+      "utf16Length": 4,
+      "utf8Length": 8
+    },
+    {
+      "name": "varString/skin-tone",
+      "value": {
+        "t": "string",
+        "v": "👍🏽"
+      },
+      "bytes": "CPCfkY3wn4+9",
+      "utf16Length": 4,
+      "utf8Length": 8
+    },
+    {
+      "name": "varString/mixed",
+      "value": {
+        "t": "string",
+        "v": "a😀b日本ć"
+      },
+      "bytes": "D2Hwn5iAYuaXpeacrGPMgQ==",
+      "utf16Length": 8,
+      "utf8Length": 15
+    },
+    {
+      "name": "varString/replacement-char",
+      "value": {
+        "t": "string",
+        "v": "�"
+      },
+      "bytes": "A++/vQ==",
+      "utf16Length": 1,
+      "utf8Length": 3
+    },
+    {
+      "name": "varString/null-byte",
+      "value": {
+        "t": "string",
+        "v": "a\u0000b"
+      },
+      "bytes": "A2EAYg==",
+      "utf16Length": 3,
+      "utf8Length": 3
+    },
+    {
+      "name": "varString/max-bmp",
+      "value": {
+        "t": "string",
+        "v": "￿"
+      },
+      "bytes": "A++/vw==",
+      "utf16Length": 1,
+      "utf8Length": 3
+    },
+    {
+      "name": "varString/astral-boundary",
+      "value": {
+        "t": "string",
+        "v": "𐀀"
+      },
+      "bytes": "BPCQgIA=",
+      "utf16Length": 2,
+      "utf8Length": 4
+    },
+    {
+      "name": "varString/long-ascii",
+      "value": {
+        "t": "string",
+        "v": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "bytes": "rAJ4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHg=",
+      "utf16Length": 300,
+      "utf8Length": 300
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  # The suite as shipped: committed fixtures, no JavaScript anywhere. If this
+  # job ever needs Node, the package has lost the property it exists to have.
+  php:
+    name: PHP ${{ matrix.php }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.4', '8.5']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring
+          coverage: none
+
+      - name: Confirm a 64-bit runtime
+        run: php -r 'exit(PHP_INT_SIZE >= 8 ? 0 : 1);'
+
+      - uses: ramsey/composer-install@v3
+
+      - name: Check formatting
+        run: vendor/bin/pint --test
+
+      - name: Run the test suite
+        run: vendor/bin/pest --colors=always
+
+      - name: Confirm no JavaScript was needed
+        run: |
+          if [ -d node_modules ] || [ -d tools/oracle/node_modules ]; then
+            echo "::error::The PHP job installed JavaScript packages. The shipped suite must run without them."
+            exit 1
+          fi
+
+  # The differential oracle: regenerate the fixtures from the pinned packages
+  # and prove PHP still agrees with lib0 in both directions.
+  oracle:
+    name: lib0 differential
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring
+          coverage: none
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: tools/oracle/package-lock.json
+
+      - uses: ramsey/composer-install@v3
+
+      - name: Install the pinned oracle packages
+        run: npm --prefix tools/oracle ci
+
+      - name: Regenerate the fixtures
+        run: node tools/oracle/generate-fixtures.mjs
+
+      # Generation is deterministic and carries no timestamp, so any diff here
+      # is a real disagreement between the committed bytes and lib0.
+      - name: Fail if the committed fixtures moved
+        run: |
+          if ! git diff --exit-code --stat -- fixtures/; then
+            echo "::error::Regenerated fixtures differ from the committed ones. Review the diff byte by byte and update compatibility/profile-1.md before committing."
+            exit 1
+          fi
+
+      - name: Check PHP against the regenerated fixtures
+        run: vendor/bin/pest --colors=always
+
+      - name: Check that lib0 can decode PHP's output
+        run: node tools/oracle/verify-php-output.mjs

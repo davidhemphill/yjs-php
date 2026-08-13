@@ -1,0 +1,53 @@
+{
+  "writer": "writeUint8",
+  "cases": [
+    {
+      "name": "uint8/0",
+      "value": {
+        "t": "int",
+        "v": "0"
+      },
+      "bytes": "AA=="
+    },
+    {
+      "name": "uint8/1",
+      "value": {
+        "t": "int",
+        "v": "1"
+      },
+      "bytes": "AQ=="
+    },
+    {
+      "name": "uint8/127",
+      "value": {
+        "t": "int",
+        "v": "127"
+      },
+      "bytes": "fw=="
+    },
+    {
+      "name": "uint8/128",
+      "value": {
+        "t": "int",
+        "v": "128"
+      },
+      "bytes": "gA=="
+    },
+    {
+      "name": "uint8/254",
+      "value": {
+        "t": "int",
+        "v": "254"
+      },
+      "bytes": "/g=="
+    },
+    {
+      "name": "uint8/255",
+      "value": {
+        "t": "int",
+        "v": "255"
+      },
+      "bytes": "/w=="
+    }
+  ]
+}

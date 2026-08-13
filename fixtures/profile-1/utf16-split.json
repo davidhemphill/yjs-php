@@ -1,0 +1,385 @@
+{
+  "source": "yjs ContentString.prototype.splice",
+  "cases": [
+    {
+      "name": "utf16Split/\"\"/0",
+      "subject": "",
+      "offset": 0,
+      "left": "",
+      "right": "",
+      "leftLength": 0,
+      "rightLength": 0,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"abc\"/0",
+      "subject": "abc",
+      "offset": 0,
+      "left": "",
+      "right": "abc",
+      "leftLength": 0,
+      "rightLength": 3,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"abc\"/1",
+      "subject": "abc",
+      "offset": 1,
+      "left": "a",
+      "right": "bc",
+      "leftLength": 1,
+      "rightLength": 2,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"abc\"/2",
+      "subject": "abc",
+      "offset": 2,
+      "left": "ab",
+      "right": "c",
+      "leftLength": 2,
+      "rightLength": 1,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"abc\"/3",
+      "subject": "abc",
+      "offset": 3,
+      "left": "abc",
+      "right": "",
+      "leftLength": 3,
+      "rightLength": 0,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"a😀b\"/0",
+      "subject": "a😀b",
+      "offset": 0,
+      "left": "",
+      "right": "a😀b",
+      "leftLength": 0,
+      "rightLength": 4,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"a😀b\"/1",
+      "subject": "a😀b",
+      "offset": 1,
+      "left": "a",
+      "right": "😀b",
+      "leftLength": 1,
+      "rightLength": 3,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"a😀b\"/2",
+      "subject": "a😀b",
+      "offset": 2,
+      "left": "a�",
+      "right": "�b",
+      "leftLength": 2,
+      "rightLength": 2,
+      "damagedSurrogatePair": true
+    },
+    {
+      "name": "utf16Split/\"a😀b\"/3",
+      "subject": "a😀b",
+      "offset": 3,
+      "left": "a😀",
+      "right": "b",
+      "leftLength": 3,
+      "rightLength": 1,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"a😀b\"/4",
+      "subject": "a😀b",
+      "offset": 4,
+      "left": "a😀b",
+      "right": "",
+      "leftLength": 4,
+      "rightLength": 0,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"😀😃\"/0",
+      "subject": "😀😃",
+      "offset": 0,
+      "left": "",
+      "right": "😀😃",
+      "leftLength": 0,
+      "rightLength": 4,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"😀😃\"/1",
+      "subject": "😀😃",
+      "offset": 1,
+      "left": "�",
+      "right": "�😃",
+      "leftLength": 1,
+      "rightLength": 3,
+      "damagedSurrogatePair": true
+    },
+    {
+      "name": "utf16Split/\"😀😃\"/2",
+      "subject": "😀😃",
+      "offset": 2,
+      "left": "😀",
+      "right": "😃",
+      "leftLength": 2,
+      "rightLength": 2,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"😀😃\"/3",
+      "subject": "😀😃",
+      "offset": 3,
+      "left": "😀�",
+      "right": "�",
+      "leftLength": 3,
+      "rightLength": 1,
+      "damagedSurrogatePair": true
+    },
+    {
+      "name": "utf16Split/\"😀😃\"/4",
+      "subject": "😀😃",
+      "offset": 4,
+      "left": "😀😃",
+      "right": "",
+      "leftLength": 4,
+      "rightLength": 0,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/0",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 0,
+      "left": "",
+      "right": "👨‍👩‍👧‍👦",
+      "leftLength": 0,
+      "rightLength": 11,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/1",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 1,
+      "left": "�",
+      "right": "�‍👩‍👧‍👦",
+      "leftLength": 1,
+      "rightLength": 10,
+      "damagedSurrogatePair": true
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/2",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 2,
+      "left": "👨",
+      "right": "‍👩‍👧‍👦",
+      "leftLength": 2,
+      "rightLength": 9,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/3",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 3,
+      "left": "👨‍",
+      "right": "👩‍👧‍👦",
+      "leftLength": 3,
+      "rightLength": 8,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/4",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 4,
+      "left": "👨‍�",
+      "right": "�‍👧‍👦",
+      "leftLength": 4,
+      "rightLength": 7,
+      "damagedSurrogatePair": true
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/5",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 5,
+      "left": "👨‍👩",
+      "right": "‍👧‍👦",
+      "leftLength": 5,
+      "rightLength": 6,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/6",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 6,
+      "left": "👨‍👩‍",
+      "right": "👧‍👦",
+      "leftLength": 6,
+      "rightLength": 5,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/7",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 7,
+      "left": "👨‍👩‍�",
+      "right": "�‍👦",
+      "leftLength": 7,
+      "rightLength": 4,
+      "damagedSurrogatePair": true
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/8",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 8,
+      "left": "👨‍👩‍👧",
+      "right": "‍👦",
+      "leftLength": 8,
+      "rightLength": 3,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/9",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 9,
+      "left": "👨‍👩‍👧‍",
+      "right": "👦",
+      "leftLength": 9,
+      "rightLength": 2,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/10",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 10,
+      "left": "👨‍👩‍👧‍�",
+      "right": "�",
+      "leftLength": 10,
+      "rightLength": 1,
+      "damagedSurrogatePair": true
+    },
+    {
+      "name": "utf16Split/\"👨‍👩‍👧‍👦\"/11",
+      "subject": "👨‍👩‍👧‍👦",
+      "offset": 11,
+      "left": "👨‍👩‍👧‍👦",
+      "right": "",
+      "leftLength": 11,
+      "rightLength": 0,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"é😀\"/0",
+      "subject": "é😀",
+      "offset": 0,
+      "left": "",
+      "right": "é😀",
+      "leftLength": 0,
+      "rightLength": 4,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"é😀\"/1",
+      "subject": "é😀",
+      "offset": 1,
+      "left": "e",
+      "right": "́😀",
+      "leftLength": 1,
+      "rightLength": 3,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"é😀\"/2",
+      "subject": "é😀",
+      "offset": 2,
+      "left": "é",
+      "right": "😀",
+      "leftLength": 2,
+      "rightLength": 2,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"é😀\"/3",
+      "subject": "é😀",
+      "offset": 3,
+      "left": "é�",
+      "right": "�",
+      "leftLength": 3,
+      "rightLength": 1,
+      "damagedSurrogatePair": true
+    },
+    {
+      "name": "utf16Split/\"é😀\"/4",
+      "subject": "é😀",
+      "offset": 4,
+      "left": "é😀",
+      "right": "",
+      "leftLength": 4,
+      "rightLength": 0,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"日本😀語\"/0",
+      "subject": "日本😀語",
+      "offset": 0,
+      "left": "",
+      "right": "日本😀語",
+      "leftLength": 0,
+      "rightLength": 5,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"日本😀語\"/1",
+      "subject": "日本😀語",
+      "offset": 1,
+      "left": "日",
+      "right": "本😀語",
+      "leftLength": 1,
+      "rightLength": 4,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"日本😀語\"/2",
+      "subject": "日本😀語",
+      "offset": 2,
+      "left": "日本",
+      "right": "😀語",
+      "leftLength": 2,
+      "rightLength": 3,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"日本😀語\"/3",
+      "subject": "日本😀語",
+      "offset": 3,
+      "left": "日本�",
+      "right": "�語",
+      "leftLength": 3,
+      "rightLength": 2,
+      "damagedSurrogatePair": true
+    },
+    {
+      "name": "utf16Split/\"日本😀語\"/4",
+      "subject": "日本😀語",
+      "offset": 4,
+      "left": "日本😀",
+      "right": "語",
+      "leftLength": 4,
+      "rightLength": 1,
+      "damagedSurrogatePair": false
+    },
+    {
+      "name": "utf16Split/\"日本😀語\"/5",
+      "subject": "日本😀語",
+      "offset": 5,
+      "left": "日本😀語",
+      "right": "",
+      "leftLength": 5,
+      "rightLength": 0,
+      "damagedSurrogatePair": false
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "writer": "writeVarUint",
+  "cases": [
+    {
+      "name": "varUint/0",
+      "value": {
+        "t": "int",
+        "v": "0"
+      },
+      "bytes": "AA=="
+    },
+    {
+      "name": "varUint/1",
+      "value": {
+        "t": "int",
+        "v": "1"
+      },
+      "bytes": "AQ=="
+    },
+    {
+      "name": "varUint/2",
+      "value": {
+        "t": "int",
+        "v": "2"
+      },
+      "bytes": "Ag=="
+    },
+    {
+      "name": "varUint/63",
+      "value": {
+        "t": "int",
+        "v": "63"
+      },
+      "bytes": "Pw=="
+    },
+    {
+      "name": "varUint/64",
+      "value": {
+        "t": "int",
+        "v": "64"
+      },
+      "bytes": "QA=="
+    },
+    {
+      "name": "varUint/126",
+      "value": {
+        "t": "int",
+        "v": "126"
+      },
+      "bytes": "fg=="
+    },
+    {
+      "name": "varUint/127",
+      "value": {
+        "t": "int",
+        "v": "127"
+      },
+      "bytes": "fw=="
+    },
+    {
+      "name": "varUint/128",
+      "value": {
+        "t": "int",
+        "v": "128"
+      },
+      "bytes": "gAE="
+    },
+    {
+      "name": "varUint/129",
+      "value": {
+        "t": "int",
+        "v": "129"
+      },
+      "bytes": "gQE="
+    },
+    {
+      "name": "varUint/255",
+      "value": {
+        "t": "int",
+        "v": "255"
+      },
+      "bytes": "/wE="
+    },
+    {
+      "name": "varUint/256",
+      "value": {
+        "t": "int",
+        "v": "256"
+      },
+      "bytes": "gAI="
+    },
+    {
+      "name": "varUint/16383",
+      "value": {
+        "t": "int",
+        "v": "16383"
+      },
+      "bytes": "/38="
+    },
+    {
+      "name": "varUint/16384",
+      "value": {
+        "t": "int",
+        "v": "16384"
+      },
+      "bytes": "gIAB"
+    },
+    {
+      "name": "varUint/16385",
+      "value": {
+        "t": "int",
+        "v": "16385"
+      },
+      "bytes": "gYAB"
+    },
+    {
+      "name": "varUint/2097151",
+      "value": {
+        "t": "int",
+        "v": "2097151"
+      },
+      "bytes": "//9/"
+    },
+    {
+      "name": "varUint/2097152",
+      "value": {
+        "t": "int",
+        "v": "2097152"
+      },
+      "bytes": "gICAAQ=="
+    },
+    {
+      "name": "varUint/2097153",
+      "value": {
+        "t": "int",
+        "v": "2097153"
+      },
+      "bytes": "gYCAAQ=="
+    },
+    {
+      "name": "varUint/268435455",
+      "value": {
+        "t": "int",
+        "v": "268435455"
+      },
+      "bytes": "////fw=="
+    },
+    {
+      "name": "varUint/268435456",
+      "value": {
+        "t": "int",
+        "v": "268435456"
+      },
+      "bytes": "gICAgAE="
+    },
+    {
+      "name": "varUint/268435457",
+      "value": {
+        "t": "int",
+        "v": "268435457"
+      },
+      "bytes": "gYCAgAE="
+    },
+    {
+      "name": "varUint/34359738367",
+      "value": {
+        "t": "int",
+        "v": "34359738367"
+      },
+      "bytes": "/////38="
+    },
+    {
+      "name": "varUint/34359738368",
+      "value": {
+        "t": "int",
+        "v": "34359738368"
+      },
+      "bytes": "gICAgIAB"
+    },
+    {
+      "name": "varUint/34359738369",
+      "value": {
+        "t": "int",
+        "v": "34359738369"
+      },
+      "bytes": "gYCAgIAB"
+    },
+    {
+      "name": "varUint/4398046511103",
+      "value": {
+        "t": "int",
+        "v": "4398046511103"
+      },
+      "bytes": "//////9/"
+    },
+    {
+      "name": "varUint/4398046511104",
+      "value": {
+        "t": "int",
+        "v": "4398046511104"
+      },
+      "bytes": "gICAgICAAQ=="
+    },
+    {
+      "name": "varUint/4398046511105",
+      "value": {
+        "t": "int",
+        "v": "4398046511105"
+      },
+      "bytes": "gYCAgICAAQ=="
+    },
+    {
+      "name": "varUint/562949953421311",
+      "value": {
+        "t": "int",
+        "v": "562949953421311"
+      },
+      "bytes": "////////fw=="
+    },
+    {
+      "name": "varUint/562949953421312",
+      "value": {
+        "t": "int",
+        "v": "562949953421312"
+      },
+      "bytes": "gICAgICAgAE="
+    },
+    {
+      "name": "varUint/562949953421313",
+      "value": {
+        "t": "int",
+        "v": "562949953421313"
+      },
+      "bytes": "gYCAgICAgAE="
+    },
+    {
+      "name": "varUint/9007199254740990",
+      "value": {
+        "t": "int",
+        "v": "9007199254740990"
+      },
+      "bytes": "/v///////w8="
+    },
+    {
+      "name": "varUint/9007199254740991",
+      "value": {
+        "t": "int",
+        "v": "9007199254740991"
+      },
+      "bytes": "/////////w8="
+    }
+  ]
+}

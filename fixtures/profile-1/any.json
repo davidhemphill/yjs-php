@@ -1,0 +1,442 @@
+{
+  "writer": "writeAny",
+  "cases": [
+    {
+      "name": "any/undefined",
+      "value": {
+        "t": "undefined"
+      },
+      "bytes": "fw=="
+    },
+    {
+      "name": "any/null",
+      "value": {
+        "t": "null"
+      },
+      "bytes": "fg=="
+    },
+    {
+      "name": "any/true",
+      "value": {
+        "t": "bool",
+        "v": true
+      },
+      "bytes": "eA=="
+    },
+    {
+      "name": "any/false",
+      "value": {
+        "t": "bool",
+        "v": false
+      },
+      "bytes": "eQ=="
+    },
+    {
+      "name": "any/int-zero",
+      "value": {
+        "t": "int",
+        "v": "0"
+      },
+      "bytes": "fQA="
+    },
+    {
+      "name": "any/int-negative-zero",
+      "value": {
+        "t": "double",
+        "bits": "8000000000000000"
+      },
+      "bytes": "fUA="
+    },
+    {
+      "name": "any/int-one",
+      "value": {
+        "t": "int",
+        "v": "1"
+      },
+      "bytes": "fQE="
+    },
+    {
+      "name": "any/int-negative",
+      "value": {
+        "t": "int",
+        "v": "-42"
+      },
+      "bytes": "fWo="
+    },
+    {
+      "name": "any/int-bits31",
+      "value": {
+        "t": "int",
+        "v": "2147483647"
+      },
+      "bytes": "fb////8P"
+    },
+    {
+      "name": "any/int-bits31-negative",
+      "value": {
+        "t": "int",
+        "v": "-2147483647"
+      },
+      "bytes": "ff////8P"
+    },
+    {
+      "name": "any/int-past-bits31",
+      "value": {
+        "t": "double",
+        "bits": "41e0000000000000"
+      },
+      "bytes": "fE8AAAA="
+    },
+    {
+      "name": "any/int-past-bits31-negative",
+      "value": {
+        "t": "double",
+        "bits": "c1e0000000000000"
+      },
+      "bytes": "fM8AAAA="
+    },
+    {
+      "name": "any/whole-power-of-two",
+      "value": {
+        "t": "double",
+        "bits": "4270000000000000"
+      },
+      "bytes": "fFOAAAA="
+    },
+    {
+      "name": "any/whole-not-float32",
+      "value": {
+        "t": "double",
+        "bits": "4270000000001000"
+      },
+      "bytes": "e0JwAAAAABAA"
+    },
+    {
+      "name": "any/max-safe-integer",
+      "value": {
+        "t": "double",
+        "bits": "433fffffffffffff"
+      },
+      "bytes": "e0M/////////"
+    },
+    {
+      "name": "any/float-tenth",
+      "value": {
+        "t": "double",
+        "bits": "3fb999999999999a"
+      },
+      "bytes": "ez+5mZmZmZma"
+    },
+    {
+      "name": "any/float-half",
+      "value": {
+        "t": "double",
+        "bits": "3fe0000000000000"
+      },
+      "bytes": "fD8AAAA="
+    },
+    {
+      "name": "any/float-pi",
+      "value": {
+        "t": "double",
+        "bits": "400921fb54442d18"
+      },
+      "bytes": "e0AJIftURC0Y"
+    },
+    {
+      "name": "any/float-infinity",
+      "value": {
+        "t": "double",
+        "bits": "7ff0000000000000"
+      },
+      "bytes": "fH+AAAA="
+    },
+    {
+      "name": "any/float-negative-infinity",
+      "value": {
+        "t": "double",
+        "bits": "fff0000000000000"
+      },
+      "bytes": "fP+AAAA="
+    },
+    {
+      "name": "any/float-nan",
+      "value": {
+        "t": "double",
+        "bits": "7ff8000000000000"
+      },
+      "bytes": "e3/4AAAAAAAA"
+    },
+    {
+      "name": "any/bigint-zero",
+      "value": {
+        "t": "bigint",
+        "v": "0"
+      },
+      "bytes": "egAAAAAAAAAA"
+    },
+    {
+      "name": "any/bigint-negative",
+      "value": {
+        "t": "bigint",
+        "v": "-9007199254740993"
+      },
+      "bytes": "ev/f////////"
+    },
+    {
+      "name": "any/bigint-int64-min",
+      "value": {
+        "t": "bigint",
+        "v": "-9223372036854775808"
+      },
+      "bytes": "eoAAAAAAAAAA"
+    },
+    {
+      "name": "any/string-empty",
+      "value": {
+        "t": "string",
+        "v": ""
+      },
+      "bytes": "dwA="
+    },
+    {
+      "name": "any/string-emoji",
+      "value": {
+        "t": "string",
+        "v": "😀 hello"
+      },
+      "bytes": "dwrwn5iAIGhlbGxv"
+    },
+    {
+      "name": "any/bytes-empty",
+      "value": {
+        "t": "bytes",
+        "v": ""
+      },
+      "bytes": "dAA="
+    },
+    {
+      "name": "any/bytes",
+      "value": {
+        "t": "bytes",
+        "v": "AQID/w=="
+      },
+      "bytes": "dAQBAgP/"
+    },
+    {
+      "name": "any/array-empty",
+      "value": {
+        "t": "array",
+        "v": []
+      },
+      "bytes": "dQA="
+    },
+    {
+      "name": "any/array-mixed",
+      "value": {
+        "t": "array",
+        "v": [
+          {
+            "t": "int",
+            "v": "1"
+          },
+          {
+            "t": "string",
+            "v": "two"
+          },
+          {
+            "t": "null"
+          },
+          {
+            "t": "bool",
+            "v": true
+          }
+        ]
+      },
+      "bytes": "dQR9AXcDdHdvfng="
+    },
+    {
+      "name": "any/array-nested",
+      "value": {
+        "t": "array",
+        "v": [
+          {
+            "t": "array",
+            "v": [
+              {
+                "t": "array",
+                "v": [
+                  {
+                    "t": "int",
+                    "v": "1"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "bytes": "dQF1AXUBfQE="
+    },
+    {
+      "name": "any/object-empty",
+      "value": {
+        "t": "object",
+        "v": []
+      },
+      "bytes": "dgA="
+    },
+    {
+      "name": "any/object-flat",
+      "value": {
+        "t": "object",
+        "v": [
+          [
+            "name",
+            {
+              "t": "string",
+              "v": "Ada"
+            }
+          ],
+          [
+            "age",
+            {
+              "t": "int",
+              "v": "36"
+            }
+          ],
+          [
+            "active",
+            {
+              "t": "bool",
+              "v": true
+            }
+          ]
+        ]
+      },
+      "bytes": "dgMEbmFtZXcDQWRhA2FnZX0kBmFjdGl2ZXg="
+    },
+    {
+      "name": "any/object-nested",
+      "value": {
+        "t": "object",
+        "v": [
+          [
+            "outer",
+            {
+              "t": "object",
+              "v": [
+                [
+                  "inner",
+                  {
+                    "t": "array",
+                    "v": [
+                      {
+                        "t": "int",
+                        "v": "1"
+                      },
+                      {
+                        "t": "int",
+                        "v": "2"
+                      }
+                    ]
+                  }
+                ]
+              ]
+            }
+          ]
+        ]
+      },
+      "bytes": "dgEFb3V0ZXJ2AQVpbm5lcnUCfQF9Ag=="
+    },
+    {
+      "name": "any/container-ambiguity",
+      "value": {
+        "t": "array",
+        "v": [
+          {
+            "t": "object",
+            "v": []
+          },
+          {
+            "t": "array",
+            "v": []
+          },
+          {
+            "t": "object",
+            "v": [
+              [
+                "k",
+                {
+                  "t": "array",
+                  "v": []
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "bytes": "dQN2AHUAdgEBa3UA"
+    },
+    {
+      "name": "any/object-unicode-keys",
+      "value": {
+        "t": "object",
+        "v": [
+          [
+            "😀",
+            {
+              "t": "int",
+              "v": "1"
+            }
+          ],
+          [
+            "日本",
+            {
+              "t": "int",
+              "v": "2"
+            }
+          ],
+          [
+            "",
+            {
+              "t": "int",
+              "v": "3"
+            }
+          ]
+        ]
+      },
+      "bytes": "dgME8J+YgH0BBuaXpeacrH0CAH0D"
+    },
+    {
+      "name": "any/object-numeric-keys",
+      "value": {
+        "t": "object",
+        "v": [
+          [
+            "2",
+            {
+              "t": "string",
+              "v": "two"
+            }
+          ],
+          [
+            "10",
+            {
+              "t": "string",
+              "v": "ten"
+            }
+          ],
+          [
+            "b",
+            {
+              "t": "string",
+              "v": "bee"
+            }
+          ]
+        ]
+      },
+      "bytes": "dgMBMncDdHdvAjEwdwN0ZW4BYncDYmVl"
+    }
+  ]
+}

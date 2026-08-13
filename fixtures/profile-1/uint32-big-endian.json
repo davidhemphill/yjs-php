@@ -1,0 +1,69 @@
+{
+  "writer": "writeUint32BigEndian",
+  "cases": [
+    {
+      "name": "uint32/0",
+      "value": {
+        "t": "int",
+        "v": "0"
+      },
+      "bytes": "AAAAAA=="
+    },
+    {
+      "name": "uint32/1",
+      "value": {
+        "t": "int",
+        "v": "1"
+      },
+      "bytes": "AAAAAQ=="
+    },
+    {
+      "name": "uint32/255",
+      "value": {
+        "t": "int",
+        "v": "255"
+      },
+      "bytes": "AAAA/w=="
+    },
+    {
+      "name": "uint32/256",
+      "value": {
+        "t": "int",
+        "v": "256"
+      },
+      "bytes": "AAABAA=="
+    },
+    {
+      "name": "uint32/65535",
+      "value": {
+        "t": "int",
+        "v": "65535"
+      },
+      "bytes": "AAD//w=="
+    },
+    {
+      "name": "uint32/65536",
+      "value": {
+        "t": "int",
+        "v": "65536"
+      },
+      "bytes": "AAEAAA=="
+    },
+    {
+      "name": "uint32/305419896",
+      "value": {
+        "t": "int",
+        "v": "305419896"
+      },
+      "bytes": "EjRWeA=="
+    },
+    {
+      "name": "uint32/4294967295",
+      "value": {
+        "t": "int",
+        "v": "4294967295"
+      },
+      "bytes": "/////w=="
+    }
+  ]
+}
