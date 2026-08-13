@@ -62,10 +62,12 @@ it('covers every committed fixture group', function () {
         glob(dirname(Fixtures::path('manifest')).'/*.json'),
     );
 
-    // manifest carries package versions, and the utf16 groups have their own
-    // tests; everything else must be driven by a writer above, so a new fixture
-    // file cannot be added without also being exercised.
-    $expected = array_values(array_diff($committed, ['manifest', 'utf16', 'utf16-split']));
+    // manifest carries package versions; the utf16 and update groups have their
+    // own tests. Everything else must be driven by a writer above, so a new
+    // fixture file cannot be added without also being exercised somewhere.
+    $exercisedElsewhere = ['manifest', 'utf16', 'utf16-split', 'updates'];
+
+    $expected = array_values(array_diff($committed, $exercisedElsewhere));
 
     expect(array_keys(PrimitiveGroups::all()))->toEqualCanonicalizing($expected);
 });

@@ -163,8 +163,8 @@ collaboration server package, which consumes this one.
 |---|---|---|
 | 0 | Charter, scaffold, pinned oracle, committed fixtures | Done |
 | 1 | Bounded lib0 binary foundation | Done |
-| 2 | Yjs V1 wire model — IDs, state vectors, delete sets, structs, content | Next |
-| 3 | Binary update algebra — state vector extraction, merge, diff, validation | |
+| 2 | Yjs V1 wire model — IDs, state vectors, delete sets, structs, content | Done |
+| 3 | Binary update algebra — state vector extraction, merge, diff, validation | Next |
 | 4 | y-protocols sync and awareness codecs | |
 
 Phases 5 through 9 — the ReactPHP server, the Laravel package, the security and

@@ -14,7 +14,10 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import * as encoding from 'lib0/encoding'
+import * as Y from 'yjs'
 import { ContentString } from 'yjs'
+
+import updateScenarios from './update-scenarios.mjs'
 
 import {
   anyCases,
@@ -176,6 +179,43 @@ write('utf16-split', {
       leftLength: content.str.length,
       rightLength: right.str.length,
       damagedSurrogatePair: content.str !== testCase.subject.slice(0, testCase.offset),
+    }
+  }),
+})
+
+/**
+ * Whole Yjs V1 updates, with the structure Yjs itself reads out of them.
+ *
+ * Recording the structure as well as the bytes is what makes a failure
+ * diagnosable. A byte comparison alone says only that something moved; the
+ * per-struct summary says which struct, which content reference, and which
+ * clock — without needing Node to find out.
+ */
+write('updates', {
+  source: 'yjs encodeStateAsUpdate / decodeUpdate',
+  cases: updateScenarios.map((scenario) => {
+    const update = scenario.produce()
+    const decoded = Y.decodeUpdate(update)
+
+    return {
+      name: scenario.name,
+      description: scenario.description,
+      update: bytesToBase64(update),
+      stateVector: bytesToBase64(Y.encodeStateVectorFromUpdate(update)),
+      structs: decoded.structs.map((struct) => ({
+        kind: struct.constructor.name,
+        client: struct.id.client,
+        clock: struct.id.clock,
+        length: struct.length,
+        contentRef: struct.content === undefined ? null : struct.content.getRef(),
+        content: struct.content === undefined ? null : struct.content.constructor.name,
+      })),
+      deleteSet: Array.from(decoded.ds.clients.entries())
+        .sort((a, b) => b[0] - a[0])
+        .map(([client, ranges]) => ({
+          client,
+          ranges: ranges.map((range) => ({ clock: range.clock, length: range.len })),
+        })),
     }
   }),
 })

@@ -66,11 +66,63 @@ Supported, with golden-byte fixtures in both directions:
 - UTF-16 code unit length and slicing, matching JavaScript's `String.length` and `String.prototype.slice`
 - UTF-16 content splitting, matching Yjs's `ContentString.prototype.splice`
 
-Not yet implemented — these are later phases, not gaps in this one:
+## What Phase 2 covers
 
-- the Yjs V1 update and state vector structures (Phase 2)
-- merge, diff, and state vector extraction (Phase 3)
+The Yjs V1 update structure, verified against updates built by the real Yjs and
+decoded with `Y.decodeUpdate`:
+
+- state vector and delete set read/write, including delete set normalization,
+  union, and subset
+- client struct sections, with clocks reconstructed by accumulating lengths
+- all three struct kinds: `Item`, `GC` (ref 0), `Skip` (ref 10)
+- all nine content references, with nested shared-type metadata carried opaquely
+- the conditional origin, right-origin, parent, and parentSub fields
+
+Not yet implemented — later phases, not gaps in this one:
+
+- merge, diff, and state vector extraction from an update (Phase 3)
 - the y-protocols sync and awareness codecs (Phase 4)
+
+### Content reference map
+
+| Ref | Yjs class | Here | Clocks |
+|---|---|---|---:|
+| 1 | ContentDeleted | `Content\Deleted` | its length |
+| 2 | ContentJSON | `Content\Json` | element count |
+| 3 | ContentBinary | `Content\Binary` | 1 |
+| 4 | ContentString | `Content\Text` | UTF-16 units |
+| 5 | ContentEmbed | `Content\Embed` | 1 |
+| 6 | ContentFormat | `Content\Format` | 1 |
+| 7 | ContentType | `Content\SharedType` | 1 |
+| 8 | ContentAny | `Content\AnyValues` | element count |
+| 9 | ContentDoc | `Content\SubDocument` | 1 |
+
+### Three places the V1 format is easy to get wrong
+
+**The parentSub bit can be set with no field on the wire.** Yjs sets info bit 6
+from whether `parentSub` is non-null, but writes the field only inside the
+branch taken when an Item has neither an origin nor a right origin. Reading the
+field whenever the bit is set desynchronizes the rest of the stream. For the
+same reason the info byte is preserved verbatim rather than recomputed on write:
+recomputing it from the fields we hold would drop that bit.
+
+**A state vector is a prefix, not a maximum.** `contiguousEndClock()` stops at
+the first `Skip` and returns zero if a section does not begin at clock 0,
+matching `encodeStateVectorFromUpdate`. Claiming the clock past a gap would tell
+a peer we hold structs we do not have, and it would never send them.
+
+**JSON content is not re-serialized.** Refs 2, 5, and 6 carry JSON as text.
+`JSON.stringify` and PHP's `json_encode` disagree about escaping, float
+formatting, and key order, so parsing and re-encoding would change the bytes.
+The text is kept exactly as it arrived.
+
+### ContentDoc is preserved rather than rebuilt
+
+Yjs reconstructs a subdocument's options from the live `Doc` when it writes one,
+so Yjs does not necessarily reproduce the bytes it read. This library keeps what
+arrived and writes that back. That is lossless and correct for a relay, but it
+means a ContentDoc round-tripped here can differ from the same one round-tripped
+through Yjs.
 
 Never in scope, per the master plan: the V2 update codec, a materialized
 `Y.Doc`, and PHP APIs for the shared types.

@@ -1,0 +1,587 @@
+{
+  "source": "yjs encodeStateAsUpdate / decodeUpdate",
+  "cases": [
+    {
+      "name": "empty",
+      "description": "A document nobody has touched: no structs, no deletions.",
+      "update": "AAA=",
+      "stateVector": "AA==",
+      "structs": [],
+      "deleteSet": []
+    },
+    {
+      "name": "text-plain",
+      "description": "ContentString across ASCII and astral text.",
+      "update": "AQFlAAQBA2RvYxBIZWxsbyDwn5iAIHdvcmxkAA==",
+      "stateVector": "AWUO",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 101,
+          "clock": 0,
+          "length": 14,
+          "contentRef": 4,
+          "content": "ContentString"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "text-formatted",
+      "description": "ContentFormat marks around ContentString.",
+      "update": "AQdmAAQBA2RvYwRib2xkhGYDBSBhbmQghGYIBml0YWxpY0ZmAARib2xkBHRydWXGZgNmBARib2xkBG51bGzGZghmCQZpdGFsaWMKeyJzaXplIjoyfYZmDgZpdGFsaWMEbnVsbAA=",
+      "stateVector": "AWYT",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 102,
+          "clock": 0,
+          "length": 4,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 102,
+          "clock": 4,
+          "length": 5,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 102,
+          "clock": 9,
+          "length": 6,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 102,
+          "clock": 15,
+          "length": 1,
+          "contentRef": 6,
+          "content": "ContentFormat"
+        },
+        {
+          "kind": "Item",
+          "client": 102,
+          "clock": 16,
+          "length": 1,
+          "contentRef": 6,
+          "content": "ContentFormat"
+        },
+        {
+          "kind": "Item",
+          "client": 102,
+          "clock": 17,
+          "length": 1,
+          "contentRef": 6,
+          "content": "ContentFormat"
+        },
+        {
+          "kind": "Item",
+          "client": 102,
+          "clock": 18,
+          "length": 1,
+          "contentRef": 6,
+          "content": "ContentFormat"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "text-deleted",
+      "description": "ContentDeleted plus a populated delete set.",
+      "update": "AQNnAAQBA2RvYwRrZWVwgWcDB4RnCgUga2VlcAFnAQQH",
+      "stateVector": "AWcQ",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 103,
+          "clock": 0,
+          "length": 4,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 103,
+          "clock": 4,
+          "length": 7,
+          "contentRef": 1,
+          "content": "ContentDeleted"
+        },
+        {
+          "kind": "Item",
+          "client": 103,
+          "clock": 11,
+          "length": 5,
+          "contentRef": 4,
+          "content": "ContentString"
+        }
+      ],
+      "deleteSet": [
+        {
+          "client": 103,
+          "ranges": [
+            {
+              "clock": 4,
+              "length": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "text-embed",
+      "description": "ContentEmbed, written as JSON text rather than lib0 any.",
+      "update": "AQNoAAQBA2RvYwZiZWZvcmWEaAUGIGFmdGVyxWgFaAYyeyJpbWFnZSI6Imh0dHBzOi8vZXhhbXBsZS50ZXN0L2EucG5nIiwid2lkdGgiOjEwMH0A",
+      "stateVector": "AWgN",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 104,
+          "clock": 0,
+          "length": 6,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 104,
+          "clock": 6,
+          "length": 6,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 104,
+          "clock": 12,
+          "length": 1,
+          "contentRef": 5,
+          "content": "ContentEmbed"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "map-any",
+      "description": "ContentAny across every lib0 any shape a map value can take.",
+      "update": "AQdpACgBBG1ldGEGc3RyaW5nAXcFdmFsdWUoAQRtZXRhA2ludAF9KigBBG1ldGEFZmxvYXQBfD8AAAAoAQRtZXRhBGJvb2wBeCgBBG1ldGEEbnVsbAF+KAEEbWV0YQVhcnJheQF1A30BfQJ9AygBBG1ldGEGb2JqZWN0AXYBBm5lc3RlZHYBBGRlZXB4AA==",
+      "stateVector": "AWkH",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 105,
+          "clock": 0,
+          "length": 1,
+          "contentRef": 8,
+          "content": "ContentAny"
+        },
+        {
+          "kind": "Item",
+          "client": 105,
+          "clock": 1,
+          "length": 1,
+          "contentRef": 8,
+          "content": "ContentAny"
+        },
+        {
+          "kind": "Item",
+          "client": 105,
+          "clock": 2,
+          "length": 1,
+          "contentRef": 8,
+          "content": "ContentAny"
+        },
+        {
+          "kind": "Item",
+          "client": 105,
+          "clock": 3,
+          "length": 1,
+          "contentRef": 8,
+          "content": "ContentAny"
+        },
+        {
+          "kind": "Item",
+          "client": 105,
+          "clock": 4,
+          "length": 1,
+          "contentRef": 8,
+          "content": "ContentAny"
+        },
+        {
+          "kind": "Item",
+          "client": 105,
+          "clock": 5,
+          "length": 1,
+          "contentRef": 8,
+          "content": "ContentAny"
+        },
+        {
+          "kind": "Item",
+          "client": 105,
+          "clock": 6,
+          "length": 1,
+          "contentRef": 8,
+          "content": "ContentAny"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "map-binary",
+      "description": "ContentBinary from a Uint8Array map value.",
+      "update": "AQFqACMBBG1ldGEEYmxvYgYAAQL9/v8A",
+      "stateVector": "AWoB",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 106,
+          "clock": 0,
+          "length": 1,
+          "contentRef": 3,
+          "content": "ContentBinary"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "nested-types",
+      "description": "ContentType for every shared type that has no name.",
+      "update": "AQVrACcBBHJvb3QFYXJyYXkAJwEEcm9vdANtYXABJwEEcm9vdAR0ZXh0AicBBHJvb3QIZnJhZ21lbnQEJwEEcm9vdAd4bWx0ZXh0BgA=",
+      "stateVector": "AWsF",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 107,
+          "clock": 0,
+          "length": 1,
+          "contentRef": 7,
+          "content": "ContentType"
+        },
+        {
+          "kind": "Item",
+          "client": 107,
+          "clock": 1,
+          "length": 1,
+          "contentRef": 7,
+          "content": "ContentType"
+        },
+        {
+          "kind": "Item",
+          "client": 107,
+          "clock": 2,
+          "length": 1,
+          "contentRef": 7,
+          "content": "ContentType"
+        },
+        {
+          "kind": "Item",
+          "client": 107,
+          "clock": 3,
+          "length": 1,
+          "contentRef": 7,
+          "content": "ContentType"
+        },
+        {
+          "kind": "Item",
+          "client": 107,
+          "clock": 4,
+          "length": 1,
+          "contentRef": 7,
+          "content": "ContentType"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "xml-named-types",
+      "description": "ContentType for the two shared types that carry a name.",
+      "update": "AQNsAAcBBHBhZ2UDCXBhcmFncmFwaCgAbAAFYWxpZ24BdwZjZW50ZXKHbAAFCmVtYmVkLWhvb2sA",
+      "stateVector": "AWwD",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 108,
+          "clock": 0,
+          "length": 1,
+          "contentRef": 7,
+          "content": "ContentType"
+        },
+        {
+          "kind": "Item",
+          "client": 108,
+          "clock": 1,
+          "length": 1,
+          "contentRef": 8,
+          "content": "ContentAny"
+        },
+        {
+          "kind": "Item",
+          "client": 108,
+          "clock": 2,
+          "length": 1,
+          "contentRef": 7,
+          "content": "ContentType"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "subdocument",
+      "description": "ContentDoc carrying a nested document guid and its options.",
+      "update": "AQFtACkBBGRvY3MFY2hpbGQaZml4ZWQtZ3VpZC1mb3ItZGV0ZXJtaW5pc212AghhdXRvTG9hZHgEbWV0YXYBBGtpbmR3BG5vdGUA",
+      "stateVector": "AW0B",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 109,
+          "clock": 0,
+          "length": 1,
+          "contentRef": 9,
+          "content": "ContentDoc"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "multi-client",
+      "description": "Three clients merged into one update, exercising section ordering.",
+      "update": "AwGEBwAEAQNkb2MEYmV0YQE3AAQBA2RvYwVnYW1tYQEHAAQBA2RvYwVhbHBoYQA=",
+      "stateVector": "A4QHBDcFBwU=",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 900,
+          "clock": 0,
+          "length": 4,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 55,
+          "clock": 0,
+          "length": 5,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 7,
+          "clock": 0,
+          "length": 5,
+          "contentRef": 4,
+          "content": "ContentString"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "garbage-collected",
+      "description": "GC structs, from deleting a nested type in a gc-enabled document.",
+      "update": "AQNuAAEBBGxpc3QCiG4BAXcFcGxhaW4AAgFuAgACAwI=",
+      "stateVector": "AW4F",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 110,
+          "clock": 0,
+          "length": 2,
+          "contentRef": 1,
+          "content": "ContentDeleted"
+        },
+        {
+          "kind": "Item",
+          "client": 110,
+          "clock": 2,
+          "length": 1,
+          "contentRef": 8,
+          "content": "ContentAny"
+        },
+        {
+          "kind": "GC",
+          "client": 110,
+          "clock": 3,
+          "length": 2,
+          "contentRef": null,
+          "content": null
+        }
+      ],
+      "deleteSet": [
+        {
+          "client": 110,
+          "ranges": [
+            {
+              "clock": 0,
+              "length": 2
+            },
+            {
+              "clock": 3,
+              "length": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "skip-structs",
+      "description": "Skip structs, from merging two updates with a gap between them.",
+      "update": "AQNvAAQBA2RvYwZmaXJzdCAKB4RvDAV0aGlyZAA=",
+      "stateVector": "AW8G",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 111,
+          "clock": 0,
+          "length": 6,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Skip",
+          "client": 111,
+          "clock": 6,
+          "length": 7,
+          "contentRef": null,
+          "content": null
+        },
+        {
+          "kind": "Item",
+          "client": 111,
+          "clock": 13,
+          "length": 5,
+          "contentRef": 4,
+          "content": "ContentString"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "deletes-across-clients",
+      "description": "A delete set spanning several clients and disjoint ranges.",
+      "update": "AwLIAQABAQNkb2MEhMgBAwZlZmdoaWoCKQABAQNkb2MBhCkACWJjZGVmZ2hpagQDAAQBA2RvYwFhgQMAAoQDAgVkZWZnaIEDBwIDyAEBAAQpAQABAwIBAggC",
+      "stateVector": "A8gBCikKAwo=",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 200,
+          "clock": 0,
+          "length": 4,
+          "contentRef": 1,
+          "content": "ContentDeleted"
+        },
+        {
+          "kind": "Item",
+          "client": 200,
+          "clock": 4,
+          "length": 6,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 41,
+          "clock": 0,
+          "length": 1,
+          "contentRef": 1,
+          "content": "ContentDeleted"
+        },
+        {
+          "kind": "Item",
+          "client": 41,
+          "clock": 1,
+          "length": 9,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 3,
+          "clock": 0,
+          "length": 1,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 3,
+          "clock": 1,
+          "length": 2,
+          "contentRef": 1,
+          "content": "ContentDeleted"
+        },
+        {
+          "kind": "Item",
+          "client": 3,
+          "clock": 3,
+          "length": 5,
+          "contentRef": 4,
+          "content": "ContentString"
+        },
+        {
+          "kind": "Item",
+          "client": 3,
+          "clock": 8,
+          "length": 2,
+          "contentRef": 1,
+          "content": "ContentDeleted"
+        }
+      ],
+      "deleteSet": [
+        {
+          "client": 200,
+          "ranges": [
+            {
+              "clock": 0,
+              "length": 4
+            }
+          ]
+        },
+        {
+          "client": 41,
+          "ranges": [
+            {
+              "clock": 0,
+              "length": 1
+            }
+          ]
+        },
+        {
+          "client": 3,
+          "ranges": [
+            {
+              "clock": 1,
+              "length": 2
+            },
+            {
+              "clock": 8,
+              "length": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "content-json",
+      "description": "ContentJSON, the legacy JSON-encoded content reference.",
+      "update": "AQFwACIBBHJvb3QFZmllbGQDD3sibGVnYWN5Ijp0cnVlfQl1bmRlZmluZWQCNDIA",
+      "stateVector": "AXAD",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 112,
+          "clock": 0,
+          "length": 3,
+          "contentRef": 2,
+          "content": "ContentJSON"
+        }
+      ],
+      "deleteSet": []
+    }
+  ]
+}

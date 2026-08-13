@@ -304,7 +304,7 @@ final class Decoder
      */
     private function readAnyArray(): array
     {
-        $count = $this->readCollectionSize(minimumBytesPerElement: 1);
+        $count = $this->readCount(minimumBytesPerElement: 1);
 
         return $this->nested(function () use ($count): array {
             $values = [];
@@ -326,7 +326,7 @@ final class Decoder
      */
     private function readAnyObject(): stdClass
     {
-        $count = $this->readCollectionSize(minimumBytesPerElement: 2);
+        $count = $this->readCount(minimumBytesPerElement: 2);
 
         return $this->nested(function () use ($count): stdClass {
             $object = new stdClass;
@@ -344,12 +344,14 @@ final class Decoder
      * Read a declared element count and reject it before anything is reserved.
      *
      * The configured limit is a policy ceiling; the remaining-bytes check is an
-     * exact one. Every element costs at least its own tag byte, so a count
-     * larger than the bytes left cannot possibly be honest.
+     * exact one. Every element costs at least some minimum number of bytes, so
+     * a count larger than the bytes left cannot possibly be honest.
+     *
+     * @param  int  $minimumBytesPerElement  The smallest an element can encode to.
      *
      * @throws LimitExceeded
      */
-    private function readCollectionSize(int $minimumBytesPerElement): int
+    public function readCount(int $minimumBytesPerElement): int
     {
         $start = $this->position;
         $count = $this->readVarUint();
