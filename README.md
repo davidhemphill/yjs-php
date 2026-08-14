@@ -25,7 +25,7 @@ types, which is where the real complexity and the real divergence risk live.
 ## Installation
 
 ```bash
-composer require davidhemphill/yjs-php
+composer require hemp/yjs
 ```
 
 ## The primitives

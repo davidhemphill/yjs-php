@@ -1,5 +1,5 @@
 {
-    "name": "davidhemphill/yjs-php",
+    "name": "hemp/yjs",
     "description": "A pure-PHP implementation of the Yjs V1 binary update format and the lib0 primitives it is built on.",
     "type": "library",
     "license": "MIT",
