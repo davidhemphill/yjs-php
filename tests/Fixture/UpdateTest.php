@@ -6,6 +6,7 @@ use Yjs\Binary\DecodeLimits;
 use Yjs\Id\StateVector;
 use Yjs\Tests\Support\Fixtures;
 use Yjs\Update\Update;
+use Yjs\Wire\Content\SubDocument;
 use Yjs\Wire\Gc;
 use Yjs\Wire\Item;
 use Yjs\Wire\Skip;
@@ -54,6 +55,65 @@ it('re-encodes to the identical bytes', function (array $case) {
     $bytes = base64_decode($case['update'], strict: true);
 
     expect(Update::decode($bytes, DecodeLimits::trusted())->encode())->toBeBytes($bytes);
+})->with($cases);
+
+/**
+ * Agreement with Yjs's own update-level round trip.
+ *
+ * For every current fixture this is the same bytes as the input, because
+ * merging a single update is a no-op in Yjs. It is asserted separately anyway
+ * because `mergedByYjs` is the oracle Phase 3 needs — once merges combine two
+ * updates the result will differ from either input, and having the comparison
+ * already wired means the merge work starts with a real reference rather than
+ * a fresh assumption.
+ */
+it('agrees with Yjs at the update level', function (array $case) {
+    $bytes = base64_decode($case['update'], strict: true);
+
+    expect(Update::decode($bytes, DecodeLimits::trusted())->encode())
+        ->toBeBytes(base64_decode($case['mergedByYjs'], strict: true));
+})->with($cases);
+
+/**
+ * Yjs has two round trips over an update and they are not equivalent: through a
+ * live `Doc`, which rebuilds content from the materialized document, or through
+ * `mergeUpdates`, which works on the update itself. This library is the second
+ * kind, and this is the fixture that can tell the difference.
+ */
+it('follows the update-level path where the two Yjs paths disagree', function () {
+    $case = Fixtures::cases('updates')['subdocument-foreign-opts'];
+
+    $updateLevel = base64_decode($case['mergedByYjs'], strict: true);
+    $liveDocument = base64_decode($case['viaLiveDocument'], strict: true);
+
+    // Guard the premise: if these ever stop differing, this test has quietly
+    // stopped discriminating and would pass no matter which path we copied.
+    expect(bin2hex($updateLevel))->not->toBe(bin2hex($liveDocument));
+
+    $update = Update::decode(base64_decode($case['update'], strict: true), DecodeLimits::trusted());
+
+    expect($update->encode())->toBeBytes($updateLevel);
+    expect(bin2hex($update->encode()))->not->toBe(bin2hex($liveDocument));
+
+    // The live-document path drops these; the update-level path keeps them.
+    $content = $update->structs()[0]->content;
+
+    expect($content)->toBeInstanceOf(SubDocument::class)
+        ->and($content->guid)->toBe('guid-1')
+        ->and(get_object_vars($content->options))->toHaveKeys(['shouldLoad', 'extraKey', 'gc']);
+});
+
+it('matches both Yjs paths for every update Yjs originated', function (array $case) {
+    // ContentDoc normalizes its options when the content is constructed, so
+    // anything Yjs produces is already normalized before it reaches the wire and
+    // the two paths cannot come apart. Only a foreign update separates them.
+    if ($case['name'] === 'subdocument-foreign-opts') {
+        expect($case['mergedByYjs'])->not->toBe($case['viaLiveDocument']);
+
+        return;
+    }
+
+    expect($case['mergedByYjs'])->toBe($case['viaLiveDocument'], "{$case['name']}: Yjs paths disagree");
 })->with($cases);
 
 it('decodes the delete set Yjs reads', function (array $case) {

@@ -116,13 +116,21 @@ a peer we hold structs we do not have, and it would never send them.
 formatting, and key order, so parsing and re-encoding would change the bytes.
 The text is kept exactly as it arrived.
 
-### ContentDoc is preserved rather than rebuilt
+### Yjs has two round trips, and they are not the same
 
-Yjs reconstructs a subdocument's options from the live `Doc` when it writes one,
-so Yjs does not necessarily reproduce the bytes it read. This library keeps what
-arrived and writes that back. That is lossless and correct for a relay, but it
-means a ContentDoc round-tripped here can differ from the same one round-tripped
-through Yjs.
+Yjs can put an update through a live `Doc` (`applyUpdate` then
+`encodeStateAsUpdate`) or through the update itself (`mergeUpdates`). The first
+rebuilds content from a materialized document; the second does not. This library
+is the second kind, so `mergedByYjs` in the update fixtures records Yjs's
+update-level output and every fixture asserts against it. Matching only our own
+input would never catch imitating the wrong one of the two.
+
+The two paths agree on everything Yjs originates. `ContentDoc` is where they can
+come apart: its constructor rebuilds `opts` down to `gc`, `autoLoad`, and `meta`,
+but it does so when the content is *created*, so options are already normalized
+before they reach the wire. An update from somewhere else can carry more, and
+then `mergeUpdates` preserves the extra keys while the live-document path drops
+them. The `subdocument-foreign-opts` fixture pins that case.
 
 Never in scope, per the master plan: the V2 update codec, a materialized
 `Y.Doc`, and PHP APIs for the shared types.

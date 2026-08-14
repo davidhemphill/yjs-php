@@ -229,4 +229,41 @@ scenario('content-json', 'ContentJSON, the legacy JSON-encoded content reference
   return update
 })
 
+/**
+ * A ContentDoc whose options carry keys Yjs never writes itself.
+ *
+ * ContentDoc's constructor rebuilds `opts` from the live document, keeping only
+ * `gc`, `autoLoad`, and `meta`. That normalization happens when the content is
+ * created, so everything Yjs originates is already normalized by the time it
+ * reaches the wire — which is why its own round trips are byte-identical.
+ *
+ * Foreign options are the only way to tell the two code paths apart: the
+ * update-level path preserves them, and the live-document path drops them. This
+ * fixture exists to pin which of those an update-level library has to match.
+ */
+scenario('subdocument-foreign-opts', 'A hand-built ContentDoc carrying options Yjs would not write.', () => {
+  const encoder = encoding.createEncoder()
+
+  encoding.writeVarUint(encoder, 1) // one client section
+  encoding.writeVarUint(encoder, 1) // one struct
+  encoding.writeVarUint(encoder, 600) // client
+  encoding.writeVarUint(encoder, 0) // clock
+
+  encoding.writeUint8(encoder, 9 | 0b0010_0000) // ContentDoc, parentSub set
+  encoding.writeVarUint(encoder, 1) // parent is a root key
+  encoding.writeVarString(encoder, 'root')
+  encoding.writeVarString(encoder, 'child') // parentSub
+  encoding.writeVarString(encoder, 'guid-1')
+  encoding.writeAny(encoder, { shouldLoad: true, extraKey: 'x', gc: false })
+
+  encoding.writeVarUint(encoder, 0) // empty delete set
+
+  const update = encoding.toUint8Array(encoder)
+
+  // Yjs must accept it before it becomes a fixture.
+  Y.applyUpdate(new Y.Doc(), update)
+
+  return update
+})
+
 export default scenarios

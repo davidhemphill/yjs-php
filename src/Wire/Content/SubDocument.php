@@ -10,10 +10,13 @@ use Yjs\Binary\Encoder;
 /**
  * Content ref 9 — a nested document: its GUID and its options.
  *
- * Yjs rebuilds the options from the live `Doc` when it writes one of these, so
- * Yjs itself does not necessarily reproduce the bytes it read. We keep what
- * arrived and write that back, which is both lossless and what a relay should
- * do — see the note in compatibility/profile-1.md.
+ * The options are kept exactly as they arrived, which is what Yjs's own
+ * update-level code does. Yjs normalizes them to `gc`, `autoLoad`, and `meta`
+ * when a ContentDoc is *constructed*, so anything Yjs originates is already
+ * normalized before it reaches the wire and every round trip is byte-identical.
+ * Only an update from somewhere else can carry anything more, and there
+ * `mergeUpdates` preserves it while the live-document path drops it. An
+ * update-level library matches the former.
  */
 final class SubDocument implements Content
 {

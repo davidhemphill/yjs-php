@@ -184,6 +184,18 @@ write('utf16-split', {
 })
 
 /**
+ * Put an update through a live document and encode it back out.
+ *
+ * This is Yjs's *other* round trip: it materializes the update into a Doc and
+ * re-derives the bytes from that, rather than working on the update itself.
+ */
+const reencodeThroughDocument = (update) => {
+  const doc = new Y.Doc()
+  Y.applyUpdate(doc, update)
+  return Y.encodeStateAsUpdate(doc)
+}
+
+/**
  * Whole Yjs V1 updates, with the structure Yjs itself reads out of them.
  *
  * Recording the structure as well as the bytes is what makes a failure
@@ -201,6 +213,12 @@ write('updates', {
       name: scenario.name,
       description: scenario.description,
       update: bytesToBase64(update),
+      // Yjs's two round trips over the same update. They agree on everything
+      // Yjs originates, so recording both is what makes the cases where they
+      // come apart visible — and those are the only ones that can tell whether
+      // an implementation copied the right one.
+      mergedByYjs: bytesToBase64(Y.mergeUpdates([update])),
+      viaLiveDocument: bytesToBase64(reencodeThroughDocument(update)),
       stateVector: bytesToBase64(Y.encodeStateVectorFromUpdate(update)),
       structs: decoded.structs.map((struct) => ({
         kind: struct.constructor.name,

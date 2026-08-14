@@ -5,6 +5,8 @@
       "name": "empty",
       "description": "A document nobody has touched: no structs, no deletions.",
       "update": "AAA=",
+      "mergedByYjs": "AAA=",
+      "viaLiveDocument": "AAA=",
       "stateVector": "AA==",
       "structs": [],
       "deleteSet": []
@@ -13,6 +15,8 @@
       "name": "text-plain",
       "description": "ContentString across ASCII and astral text.",
       "update": "AQFlAAQBA2RvYxBIZWxsbyDwn5iAIHdvcmxkAA==",
+      "mergedByYjs": "AQFlAAQBA2RvYxBIZWxsbyDwn5iAIHdvcmxkAA==",
+      "viaLiveDocument": "AQFlAAQBA2RvYxBIZWxsbyDwn5iAIHdvcmxkAA==",
       "stateVector": "AWUO",
       "structs": [
         {
@@ -30,6 +34,8 @@
       "name": "text-formatted",
       "description": "ContentFormat marks around ContentString.",
       "update": "AQdmAAQBA2RvYwRib2xkhGYDBSBhbmQghGYIBml0YWxpY0ZmAARib2xkBHRydWXGZgNmBARib2xkBG51bGzGZghmCQZpdGFsaWMKeyJzaXplIjoyfYZmDgZpdGFsaWMEbnVsbAA=",
+      "mergedByYjs": "AQdmAAQBA2RvYwRib2xkhGYDBSBhbmQghGYIBml0YWxpY0ZmAARib2xkBHRydWXGZgNmBARib2xkBG51bGzGZghmCQZpdGFsaWMKeyJzaXplIjoyfYZmDgZpdGFsaWMEbnVsbAA=",
+      "viaLiveDocument": "AQdmAAQBA2RvYwRib2xkhGYDBSBhbmQghGYIBml0YWxpY0ZmAARib2xkBHRydWXGZgNmBARib2xkBG51bGzGZghmCQZpdGFsaWMKeyJzaXplIjoyfYZmDgZpdGFsaWMEbnVsbAA=",
       "stateVector": "AWYT",
       "structs": [
         {
@@ -95,6 +101,8 @@
       "name": "text-deleted",
       "description": "ContentDeleted plus a populated delete set.",
       "update": "AQNnAAQBA2RvYwRrZWVwgWcDB4RnCgUga2VlcAFnAQQH",
+      "mergedByYjs": "AQNnAAQBA2RvYwRrZWVwgWcDB4RnCgUga2VlcAFnAQQH",
+      "viaLiveDocument": "AQNnAAQBA2RvYwRrZWVwgWcDB4RnCgUga2VlcAFnAQQH",
       "stateVector": "AWcQ",
       "structs": [
         {
@@ -138,6 +146,8 @@
       "name": "text-embed",
       "description": "ContentEmbed, written as JSON text rather than lib0 any.",
       "update": "AQNoAAQBA2RvYwZiZWZvcmWEaAUGIGFmdGVyxWgFaAYyeyJpbWFnZSI6Imh0dHBzOi8vZXhhbXBsZS50ZXN0L2EucG5nIiwid2lkdGgiOjEwMH0A",
+      "mergedByYjs": "AQNoAAQBA2RvYwZiZWZvcmWEaAUGIGFmdGVyxWgFaAYyeyJpbWFnZSI6Imh0dHBzOi8vZXhhbXBsZS50ZXN0L2EucG5nIiwid2lkdGgiOjEwMH0A",
+      "viaLiveDocument": "AQNoAAQBA2RvYwZiZWZvcmWEaAUGIGFmdGVyxWgFaAYyeyJpbWFnZSI6Imh0dHBzOi8vZXhhbXBsZS50ZXN0L2EucG5nIiwid2lkdGgiOjEwMH0A",
       "stateVector": "AWgN",
       "structs": [
         {
@@ -171,6 +181,8 @@
       "name": "map-any",
       "description": "ContentAny across every lib0 any shape a map value can take.",
       "update": "AQdpACgBBG1ldGEGc3RyaW5nAXcFdmFsdWUoAQRtZXRhA2ludAF9KigBBG1ldGEFZmxvYXQBfD8AAAAoAQRtZXRhBGJvb2wBeCgBBG1ldGEEbnVsbAF+KAEEbWV0YQVhcnJheQF1A30BfQJ9AygBBG1ldGEGb2JqZWN0AXYBBm5lc3RlZHYBBGRlZXB4AA==",
+      "mergedByYjs": "AQdpACgBBG1ldGEGc3RyaW5nAXcFdmFsdWUoAQRtZXRhA2ludAF9KigBBG1ldGEFZmxvYXQBfD8AAAAoAQRtZXRhBGJvb2wBeCgBBG1ldGEEbnVsbAF+KAEEbWV0YQVhcnJheQF1A30BfQJ9AygBBG1ldGEGb2JqZWN0AXYBBm5lc3RlZHYBBGRlZXB4AA==",
+      "viaLiveDocument": "AQdpACgBBG1ldGEGc3RyaW5nAXcFdmFsdWUoAQRtZXRhA2ludAF9KigBBG1ldGEFZmxvYXQBfD8AAAAoAQRtZXRhBGJvb2wBeCgBBG1ldGEEbnVsbAF+KAEEbWV0YQVhcnJheQF1A30BfQJ9AygBBG1ldGEGb2JqZWN0AXYBBm5lc3RlZHYBBGRlZXB4AA==",
       "stateVector": "AWkH",
       "structs": [
         {
@@ -236,6 +248,8 @@
       "name": "map-binary",
       "description": "ContentBinary from a Uint8Array map value.",
       "update": "AQFqACMBBG1ldGEEYmxvYgYAAQL9/v8A",
+      "mergedByYjs": "AQFqACMBBG1ldGEEYmxvYgYAAQL9/v8A",
+      "viaLiveDocument": "AQFqACMBBG1ldGEEYmxvYgYAAQL9/v8A",
       "stateVector": "AWoB",
       "structs": [
         {
@@ -253,6 +267,8 @@
       "name": "nested-types",
       "description": "ContentType for every shared type that has no name.",
       "update": "AQVrACcBBHJvb3QFYXJyYXkAJwEEcm9vdANtYXABJwEEcm9vdAR0ZXh0AicBBHJvb3QIZnJhZ21lbnQEJwEEcm9vdAd4bWx0ZXh0BgA=",
+      "mergedByYjs": "AQVrACcBBHJvb3QFYXJyYXkAJwEEcm9vdANtYXABJwEEcm9vdAR0ZXh0AicBBHJvb3QIZnJhZ21lbnQEJwEEcm9vdAd4bWx0ZXh0BgA=",
+      "viaLiveDocument": "AQVrACcBBHJvb3QFYXJyYXkAJwEEcm9vdANtYXABJwEEcm9vdAR0ZXh0AicBBHJvb3QIZnJhZ21lbnQEJwEEcm9vdAd4bWx0ZXh0BgA=",
       "stateVector": "AWsF",
       "structs": [
         {
@@ -302,6 +318,8 @@
       "name": "xml-named-types",
       "description": "ContentType for the two shared types that carry a name.",
       "update": "AQNsAAcBBHBhZ2UDCXBhcmFncmFwaCgAbAAFYWxpZ24BdwZjZW50ZXKHbAAFCmVtYmVkLWhvb2sA",
+      "mergedByYjs": "AQNsAAcBBHBhZ2UDCXBhcmFncmFwaCgAbAAFYWxpZ24BdwZjZW50ZXKHbAAFCmVtYmVkLWhvb2sA",
+      "viaLiveDocument": "AQNsAAcBBHBhZ2UDCXBhcmFncmFwaCgAbAAFYWxpZ24BdwZjZW50ZXKHbAAFCmVtYmVkLWhvb2sA",
       "stateVector": "AWwD",
       "structs": [
         {
@@ -335,6 +353,8 @@
       "name": "subdocument",
       "description": "ContentDoc carrying a nested document guid and its options.",
       "update": "AQFtACkBBGRvY3MFY2hpbGQaZml4ZWQtZ3VpZC1mb3ItZGV0ZXJtaW5pc212AghhdXRvTG9hZHgEbWV0YXYBBGtpbmR3BG5vdGUA",
+      "mergedByYjs": "AQFtACkBBGRvY3MFY2hpbGQaZml4ZWQtZ3VpZC1mb3ItZGV0ZXJtaW5pc212AghhdXRvTG9hZHgEbWV0YXYBBGtpbmR3BG5vdGUA",
+      "viaLiveDocument": "AQFtACkBBGRvY3MFY2hpbGQaZml4ZWQtZ3VpZC1mb3ItZGV0ZXJtaW5pc212AghhdXRvTG9hZHgEbWV0YXYBBGtpbmR3BG5vdGUA",
       "stateVector": "AW0B",
       "structs": [
         {
@@ -352,6 +372,8 @@
       "name": "multi-client",
       "description": "Three clients merged into one update, exercising section ordering.",
       "update": "AwGEBwAEAQNkb2MEYmV0YQE3AAQBA2RvYwVnYW1tYQEHAAQBA2RvYwVhbHBoYQA=",
+      "mergedByYjs": "AwGEBwAEAQNkb2MEYmV0YQE3AAQBA2RvYwVnYW1tYQEHAAQBA2RvYwVhbHBoYQA=",
+      "viaLiveDocument": "AwGEBwAEAQNkb2MEYmV0YQE3AAQBA2RvYwVnYW1tYQEHAAQBA2RvYwVhbHBoYQA=",
       "stateVector": "A4QHBDcFBwU=",
       "structs": [
         {
@@ -385,6 +407,8 @@
       "name": "garbage-collected",
       "description": "GC structs, from deleting a nested type in a gc-enabled document.",
       "update": "AQNuAAEBBGxpc3QCiG4BAXcFcGxhaW4AAgFuAgACAwI=",
+      "mergedByYjs": "AQNuAAEBBGxpc3QCiG4BAXcFcGxhaW4AAgFuAgACAwI=",
+      "viaLiveDocument": "AQNuAAEBBGxpc3QCiG4BAXcFcGxhaW4AAgFuAgACAwI=",
       "stateVector": "AW4F",
       "structs": [
         {
@@ -432,6 +456,8 @@
       "name": "skip-structs",
       "description": "Skip structs, from merging two updates with a gap between them.",
       "update": "AQNvAAQBA2RvYwZmaXJzdCAKB4RvDAV0aGlyZAA=",
+      "mergedByYjs": "AQNvAAQBA2RvYwZmaXJzdCAKB4RvDAV0aGlyZAA=",
+      "viaLiveDocument": "AQNvAAQBA2RvYwZmaXJzdCAKB4RvDAV0aGlyZAA=",
       "stateVector": "AW8G",
       "structs": [
         {
@@ -465,6 +491,8 @@
       "name": "deletes-across-clients",
       "description": "A delete set spanning several clients and disjoint ranges.",
       "update": "AwLIAQABAQNkb2MEhMgBAwZlZmdoaWoCKQABAQNkb2MBhCkACWJjZGVmZ2hpagQDAAQBA2RvYwFhgQMAAoQDAgVkZWZnaIEDBwIDyAEBAAQpAQABAwIBAggC",
+      "mergedByYjs": "AwLIAQABAQNkb2MEhMgBAwZlZmdoaWoCKQABAQNkb2MBhCkACWJjZGVmZ2hpagQDAAQBA2RvYwFhgQMAAoQDAgVkZWZnaIEDBwIDyAEBAAQpAQABAwIBAggC",
+      "viaLiveDocument": "AwLIAQABAQNkb2MEhMgBAwZlZmdoaWoCKQABAQNkb2MBhCkACWJjZGVmZ2hpagQDAAQBA2RvYwFhgQMAAoQDAgVkZWZnaIEDBwIDyAEBAAQpAQABAwIBAggC",
       "stateVector": "A8gBCikKAwo=",
       "structs": [
         {
@@ -570,6 +598,8 @@
       "name": "content-json",
       "description": "ContentJSON, the legacy JSON-encoded content reference.",
       "update": "AQFwACIBBHJvb3QFZmllbGQDD3sibGVnYWN5Ijp0cnVlfQl1bmRlZmluZWQCNDIA",
+      "mergedByYjs": "AQFwACIBBHJvb3QFZmllbGQDD3sibGVnYWN5Ijp0cnVlfQl1bmRlZmluZWQCNDIA",
+      "viaLiveDocument": "AQFwACIBBHJvb3QFZmllbGQDD3sibGVnYWN5Ijp0cnVlfQl1bmRlZmluZWQCNDIA",
       "stateVector": "AXAD",
       "structs": [
         {
@@ -579,6 +609,25 @@
           "length": 3,
           "contentRef": 2,
           "content": "ContentJSON"
+        }
+      ],
+      "deleteSet": []
+    },
+    {
+      "name": "subdocument-foreign-opts",
+      "description": "A hand-built ContentDoc carrying options Yjs would not write.",
+      "update": "AQHYBAApAQRyb290BWNoaWxkBmd1aWQtMXYDCnNob3VsZExvYWR4CGV4dHJhS2V5dwF4AmdjeQA=",
+      "mergedByYjs": "AQHYBAApAQRyb290BWNoaWxkBmd1aWQtMXYDCnNob3VsZExvYWR4CGV4dHJhS2V5dwF4AmdjeQA=",
+      "viaLiveDocument": "AQHYBAApAQRyb290BWNoaWxkBmd1aWQtMXYBAmdjeQA=",
+      "stateVector": "AdgEAQ==",
+      "structs": [
+        {
+          "kind": "Item",
+          "client": 600,
+          "clock": 0,
+          "length": 1,
+          "contentRef": 9,
+          "content": "ContentDoc"
         }
       ],
       "deleteSet": []
