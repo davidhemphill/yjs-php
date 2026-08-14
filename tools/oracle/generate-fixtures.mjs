@@ -16,6 +16,8 @@ import { fileURLToPath } from 'node:url'
 import * as encoding from 'lib0/encoding'
 import * as Y from 'yjs'
 import { ContentString } from 'yjs'
+import * as syncProtocol from 'y-protocols/sync'
+import * as awarenessProtocol from 'y-protocols/awareness'
 
 import updateScenarios from './update-scenarios.mjs'
 
@@ -236,6 +238,90 @@ write('updates', {
         })),
     }
   }),
+})
+
+/**
+ * y-protocols sync and awareness messages, produced by the real y-protocols.
+ *
+ * These are transcripts rather than values: what actually goes over a socket
+ * between a provider and a server, so the PHP codec is checked against traffic
+ * instead of against a reading of the spec.
+ */
+write('protocol', {
+  source: 'y-protocols sync.js and awareness.js',
+  sync: (() => {
+    const doc = new Y.Doc()
+    doc.clientID = 700
+    doc.getText('text').insert(0, 'protocol fixtures 😀')
+    doc.getMap('map').set('k', { nested: true })
+
+    const empty = new Y.Doc()
+    const cases = []
+
+    const frame = (name, describe, build) => {
+      const encoder = encoding.createEncoder()
+      build(encoder)
+      cases.push({ name, description: describe, bytes: bytesToBase64(encoding.toUint8Array(encoder)) })
+    }
+
+    frame('step1-empty', 'SyncStep1 from a peer holding nothing.', (e) => syncProtocol.writeSyncStep1(e, empty))
+    frame('step1-populated', 'SyncStep1 from a peer that already has content.', (e) => syncProtocol.writeSyncStep1(e, doc))
+    frame('step2-full', 'SyncStep2 answering a peer that holds nothing.', (e) =>
+      syncProtocol.writeSyncStep2(e, doc, Y.encodeStateVector(empty)))
+    frame('step2-empty', 'SyncStep2 answering a peer that is already current.', (e) =>
+      syncProtocol.writeSyncStep2(e, doc, Y.encodeStateVector(doc)))
+    frame('update', 'An unprompted update broadcast.', (e) =>
+      syncProtocol.writeUpdate(e, Y.encodeStateAsUpdate(doc)))
+    frame('two-messages', 'Two messages packed into one frame, as a provider may send.', (e) => {
+      syncProtocol.writeSyncStep1(e, doc)
+      syncProtocol.writeUpdate(e, Y.encodeStateAsUpdate(doc))
+    })
+
+    return cases
+  })(),
+  awareness: (() => {
+    const cases = []
+
+    const build = (name, describe, clientStates) => {
+      const awareness = new awarenessProtocol.Awareness(new Y.Doc())
+      const clients = []
+
+      for (const [clientID, state] of clientStates) {
+        awareness.meta.set(clientID, { clock: 1, lastUpdated: 0 })
+        if (state !== null) {
+          awareness.states.set(clientID, state)
+        }
+        clients.push(clientID)
+      }
+
+      cases.push({
+        name,
+        description: describe,
+        clients: clientStates.map(([clientID, state]) => ({
+          client: clientID,
+          clock: 1,
+          state: state === null ? null : JSON.stringify(state),
+        })),
+        bytes: bytesToBase64(awarenessProtocol.encodeAwarenessUpdate(awareness, clients)),
+      })
+
+      // Awareness starts an interval to expire outdated clients, which would
+      // keep this process alive forever once the fixtures are written.
+      awareness.destroy()
+    }
+
+    build('empty', 'An update mentioning nobody.', [])
+    build('single', 'One client announcing itself.', [[11, { name: 'Ada', color: '#f00' }]])
+    build('several', 'Three clients at once.', [
+      [11, { name: 'Ada' }],
+      [22, { name: 'Grace', cursor: { anchor: 3, head: 9 } }],
+      [33, { name: '日本 😀' }],
+    ])
+    build('removal', 'A client going away, encoded as a null state.', [[44, null]])
+    build('mixed', 'A presence and a departure in one update.', [[11, { name: 'Ada' }], [44, null]])
+
+    return cases
+  })(),
 })
 
 write('manifest', {

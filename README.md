@@ -7,9 +7,10 @@ No Node, no FFI, no WASM, no codec sidecar. The package requires PHP 8.4 on a
 64-bit build and nothing else, which is asserted by the test suite rather than
 promised in prose.
 
-> **Status: Phase 1 of 9.** The binary foundation is complete and verified in
-> both directions against lib0 0.2.117. The update model, the update algebra,
-> and the protocol codecs are not implemented yet — see [Roadmap](#roadmap).
+> **Status: Phases 0–4 done.** The binary foundation, the V1 wire model, the
+> update algebra, and the y-protocols codecs are complete and verified against
+> the real yjs, lib0, and y-protocols. What remains lives in the collaboration
+> server that consumes this package — see [Roadmap](#roadmap).
 
 ## Why it exists
 
@@ -27,7 +28,7 @@ types, which is where the real complexity and the real divergence risk live.
 composer require davidhemphill/yjs-php
 ```
 
-## What Phase 1 gives you
+## The primitives
 
 ```php
 use Yjs\Binary\Decoder;
@@ -75,6 +76,30 @@ merging does not, and a split that lands inside a surrogate pair replaces it wit
 U+FFFD — so a merged update can preserve an emoji that sequential application
 destroys. Yjs does this too. It is a property of the format, not a choice made
 here.
+
+### Speaking the protocol
+
+```php
+use Yjs\Protocol\Sync\{SyncMessageReader, SyncStep1, SyncStep2, ReadOnlyPolicy, SyncAdmission};
+use Yjs\Protocol\Awareness\{AwarenessStore, AwarenessUpdate};
+
+foreach (SyncMessageReader::decodeAll($frame) as $message) {
+    if ($message instanceof SyncStep1) {
+        $reply = $message->answer($resident);   // a SyncStep2 with what they lack
+    }
+}
+
+// What a read-only session may accept.
+ReadOnlyPolicy::admit($message, $resident) === SyncAdmission::IntroducesState;
+
+$presence = new AwarenessStore;
+$change = $presence->apply(AwarenessUpdate::decode($bytes), now: $milliseconds);
+$presence->expire(now: $milliseconds);          // clients that went quiet
+```
+
+The Hocuspocus provider frames — the document address, Auth, Close, SyncStatus —
+are not in this package. They are the provider's protocol rather than Yjs's, and
+they carry session state that belongs in a server.
 
 ### Reading untrusted bytes
 
@@ -170,7 +195,8 @@ composer test                     # pint --test, then the full suite
 
 npm --prefix tools/oracle ci      # only needed to touch the fixtures
 composer fixtures                 # regenerate from the pinned lib0
-composer fixtures:verify          # lib0 decodes PHP's output
+composer fixtures:verify          # lib0 and y-protocols read PHP's output
+composer oracle                   # differential test of merge and diff
 ```
 
 The fixtures in `fixtures/profile-1/` are committed so the suite runs without
@@ -190,11 +216,12 @@ collaboration server package, which consumes this one.
 | 1 | Bounded lib0 binary foundation | Done |
 | 2 | Yjs V1 wire model — IDs, state vectors, delete sets, structs, content | Done |
 | 3 | Binary update algebra — state vector extraction, merge, diff, validation | Done |
-| 4 | y-protocols sync and awareness codecs | Next |
+| 4 | y-protocols sync and awareness codecs | Done |
 
-Phases 5 through 9 — the ReactPHP server, the Laravel package, the security and
-performance gate, multi-node scaling, and provider v4 — belong to the
-collaboration server repository.
+Phases 5 through 9 — the ReactPHP server, the Hocuspocus provider frames, the
+Laravel package, the security and performance gate, multi-node scaling, and
+provider v4 — belong to the collaboration server repository that consumes this
+one.
 
 ## License
 

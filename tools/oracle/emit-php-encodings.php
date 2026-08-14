@@ -11,7 +11,10 @@ declare(strict_types=1);
  * PHP still gets caught.
  */
 
+use Yjs\Binary\DecodeLimits;
 use Yjs\Binary\Encoder;
+use Yjs\Protocol\Awareness\AwarenessUpdate;
+use Yjs\Protocol\Sync\SyncMessageReader;
 use Yjs\Tests\Support\Fixtures;
 use Yjs\Tests\Support\PrimitiveGroups;
 
@@ -36,8 +39,32 @@ foreach (PrimitiveGroups::all() as $group => $writer) {
     $groups[$group] = $cases;
 }
 
+/**
+ * PHP's re-encoding of each protocol transcript, so the verifier can feed them
+ * to the real y-protocols rather than only comparing bytes.
+ */
+$protocol = Fixtures::load('protocol');
+$frames = ['sync' => [], 'awareness' => []];
+
+foreach ($protocol['sync'] as $case) {
+    $encoder = new Encoder;
+
+    foreach (SyncMessageReader::decodeAll(base64_decode($case['bytes'], strict: true), DecodeLimits::trusted()) as $message) {
+        $message->write($encoder);
+    }
+
+    $frames['sync'][] = ['name' => $case['name'], 'bytes' => base64_encode($encoder->toBytes())];
+}
+
+foreach ($protocol['awareness'] as $case) {
+    $update = AwarenessUpdate::decode(base64_decode($case['bytes'], strict: true));
+
+    $frames['awareness'][] = ['name' => $case['name'], 'bytes' => base64_encode($update->encode())];
+}
+
 echo json_encode([
     'php' => PHP_VERSION,
     'intSize' => PHP_INT_SIZE,
     'groups' => $groups,
+    'protocol' => $frames,
 ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);

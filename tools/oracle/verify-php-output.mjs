@@ -11,11 +11,15 @@ import { createRequire } from 'node:module'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import * as decoding from 'lib0/decoding'
+import * as Y from 'yjs'
+import * as awarenessProtocol from 'y-protocols/awareness'
 
 import { realize, sameValue } from './spec.mjs'
 
 const require = createRequire(import.meta.url)
 const here = dirname(fileURLToPath(import.meta.url))
+
+const fromB64 = (text) => Uint8Array.from(Buffer.from(text, 'base64'))
 
 /** The lib0 reader that corresponds to each fixture group's writer. */
 const readers = {
@@ -94,6 +98,70 @@ if (failures.length > 0) {
   process.exit(1)
 }
 
+/**
+ * The protocol frames, fed to the real y-protocols.
+ *
+ * Byte equality is already covered by the committed transcripts; this proves
+ * the other direction, that y-protocols can consume what PHP produces.
+ */
+let protocolChecked = 0
+
+for (const frame of report.protocol.sync) {
+    const bytes = fromB64(frame.bytes)
+    const reader = decoding.createDecoder(bytes)
+
+    try {
+        while (decoding.hasContent(reader)) {
+            const type = decoding.readVarUint(reader)
+
+            if (![0, 1, 2].includes(type)) {
+                throw new Error(`unknown sync message type ${type}`)
+            }
+
+            const payload = decoding.readVarUint8Array(reader)
+
+            // A step1 carries a state vector; the others carry an update. Both
+            // must survive Yjs's own decoders.
+            if (type === 0) {
+                Y.decodeStateVector(payload)
+            } else {
+                Y.decodeUpdate(payload)
+            }
+        }
+
+        protocolChecked++
+    } catch (error) {
+        failures.push(`sync/${frame.name}: y-protocols could not read PHP's frame — ${error.message}`)
+    }
+}
+
+for (const frame of report.protocol.awareness) {
+    const doc = new Y.Doc()
+    const awareness = new awarenessProtocol.Awareness(doc)
+
+    try {
+        awarenessProtocol.applyAwarenessUpdate(awareness, fromB64(frame.bytes), 'verify')
+        protocolChecked++
+    } catch (error) {
+        failures.push(`awareness/${frame.name}: y-protocols could not apply PHP's update — ${error.message}`)
+    } finally {
+        // The Awareness constructor starts an expiry interval that would keep
+        // this process alive.
+        awareness.destroy()
+    }
+}
+
+if (failures.length > 0) {
+    console.error(`\n${failures.length} protocol frame(s) failed:\n`)
+    for (const failure of failures) {
+        console.error(`  ✗ ${failure}`)
+    }
+    process.exit(1)
+}
+
 const lib0Version = require('lib0/package.json').version
 
-console.log(`lib0 ${lib0Version} decoded all ${checked} cases encoded by PHP ${report.php}.`)
+console.log(
+    `lib0 ${lib0Version} decoded all ${checked} cases encoded by PHP ${report.php}, ` +
+        `and y-protocols read all ${protocolChecked} PHP-encoded protocol frames.`,
+)

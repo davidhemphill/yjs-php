@@ -1,0 +1,106 @@
+{
+  "source": "y-protocols sync.js and awareness.js",
+  "sync": [
+    {
+      "name": "step1-empty",
+      "description": "SyncStep1 from a peer holding nothing.",
+      "bytes": "AAEA"
+    },
+    {
+      "name": "step1-populated",
+      "description": "SyncStep1 from a peer that already has content.",
+      "bytes": "AAQBvAUV"
+    },
+    {
+      "name": "step2-full",
+      "description": "SyncStep2 answering a peer that holds nothing.",
+      "bytes": "ATcBArwFAAQBBHRleHQWcHJvdG9jb2wgZml4dHVyZXMg8J+YgCgBA21hcAFrAXYBBm5lc3RlZHgA"
+    },
+    {
+      "name": "step2-empty",
+      "description": "SyncStep2 answering a peer that is already current.",
+      "bytes": "AQIAAA=="
+    },
+    {
+      "name": "update",
+      "description": "An unprompted update broadcast.",
+      "bytes": "AjcBArwFAAQBBHRleHQWcHJvdG9jb2wgZml4dHVyZXMg8J+YgCgBA21hcAFrAXYBBm5lc3RlZHgA"
+    },
+    {
+      "name": "two-messages",
+      "description": "Two messages packed into one frame, as a provider may send.",
+      "bytes": "AAQBvAUVAjcBArwFAAQBBHRleHQWcHJvdG9jb2wgZml4dHVyZXMg8J+YgCgBA21hcAFrAXYBBm5lc3RlZHgA"
+    }
+  ],
+  "awareness": [
+    {
+      "name": "empty",
+      "description": "An update mentioning nobody.",
+      "clients": [],
+      "bytes": "AA=="
+    },
+    {
+      "name": "single",
+      "description": "One client announcing itself.",
+      "clients": [
+        {
+          "client": 11,
+          "clock": 1,
+          "state": "{\"name\":\"Ada\",\"color\":\"#f00\"}"
+        }
+      ],
+      "bytes": "AQsBHXsibmFtZSI6IkFkYSIsImNvbG9yIjoiI2YwMCJ9"
+    },
+    {
+      "name": "several",
+      "description": "Three clients at once.",
+      "clients": [
+        {
+          "client": 11,
+          "clock": 1,
+          "state": "{\"name\":\"Ada\"}"
+        },
+        {
+          "client": 22,
+          "clock": 1,
+          "state": "{\"name\":\"Grace\",\"cursor\":{\"anchor\":3,\"head\":9}}"
+        },
+        {
+          "client": 33,
+          "clock": 1,
+          "state": "{\"name\":\"日本 😀\"}"
+        }
+      ],
+      "bytes": "AwsBDnsibmFtZSI6IkFkYSJ9FgEveyJuYW1lIjoiR3JhY2UiLCJjdXJzb3IiOnsiYW5jaG9yIjozLCJoZWFkIjo5fX0hARZ7Im5hbWUiOiLml6XmnKwg8J+YgCJ9"
+    },
+    {
+      "name": "removal",
+      "description": "A client going away, encoded as a null state.",
+      "clients": [
+        {
+          "client": 44,
+          "clock": 1,
+          "state": null
+        }
+      ],
+      "bytes": "ASwBBG51bGw="
+    },
+    {
+      "name": "mixed",
+      "description": "A presence and a departure in one update.",
+      "clients": [
+        {
+          "client": 11,
+          "clock": 1,
+          "state": "{\"name\":\"Ada\"}"
+        },
+        {
+          "client": 44,
+          "clock": 1,
+          "state": null
+        }
+      ],
+      "bytes": "AgsBDnsibmFtZSI6IkFkYSJ9LAEEbnVsbA=="
+    }
+  ]
+}

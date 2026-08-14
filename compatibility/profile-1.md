@@ -94,9 +94,58 @@ Merge and diff are **byte-identical to Yjs**, not merely equivalent. That is a
 stronger claim than the roadmap asks for, and it was worth the extra work:
 matching bytes means a disagreement is a bug rather than a judgement call.
 
-Not yet implemented — a later phase, not a gap in this one:
+## What Phase 4 covers
 
-- the y-protocols sync and awareness codecs (Phase 4)
+The y-protocols codecs, checked against transcripts produced by the real
+y-protocols and fed back into it:
+
+- sync messages: SyncStep1 (0), SyncStep2 (1), Update (2), including several
+  packed into one frame as a provider may send them
+- awareness: update encoding, per-client clocks, removals, and expiry
+- the read-only decision table
+
+### What this package deliberately does not include
+
+The Hocuspocus **provider frames** — the document address, Auth, Stateless,
+Close, SyncStatus — are not here. They are the provider's protocol rather than
+Yjs's, and the master plan assigns them to the collaboration server repository
+along with the session state they imply: per-address authentication, bounded
+pre-auth queues, ordered drain after authentication. Putting them in a library
+whose whole claim is that it is a generic Yjs implementation would be the wrong
+trade.
+
+What is here is everything those frames wrap, plus the decision they need:
+`ReadOnlyPolicy` answers whether an inbound sync message introduces document
+state, which is the question a read-only session has to resolve before it can
+choose a SyncStatus.
+
+### The read-only table
+
+| Message | Verdict | Acknowledgement |
+|---|---|---|
+| SyncStep1 | Allowed | positive |
+| SyncStep2 or Update, empty | Redundant | positive |
+| SyncStep2 or Update the server already has | Redundant | positive |
+| SyncStep2 or Update carrying anything new | IntroducesState | negative |
+
+A read-only client still completes a full sync handshake, and a handshake means
+answering SyncStep1 with SyncStep2 — so a read-only peer *will* send updates and
+refusing all of them would break the exchange it is entitled to. The line is
+drawn at whether an update would change anything, which is
+`Update::contains()`.
+
+### Awareness is kept as JSON text
+
+Awareness state is application-defined and this library has no reason to look
+inside it. Parsing and re-serializing would also change the bytes, for the same
+reason ContentJSON is left alone. A removal is the JSON document `null`, and
+that is compared after trimming JSON whitespace so ` null ` is recognized too.
+
+Awareness is also the easiest part of the protocol to abuse: it is ephemeral,
+unversioned, broadcast to every peer, and has no delete set to bound it.
+`AwarenessLimits` caps clients per update, state size, and tracked clients.
+Expiry is driven by a caller-supplied clock rather than read from the system,
+so a server drives it from its own loop and a test does not have to sleep.
 
 ### How the algebra is checked
 
