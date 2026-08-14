@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Sync;
+namespace Hemp\Yjs\Protocol\Sync;
 
 /**
  * What a read-only session may do with an inbound sync message.

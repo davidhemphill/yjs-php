@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Awareness;
+namespace Hemp\Yjs\Protocol\Awareness;
 
 /**
  * What an awareness operation actually altered.

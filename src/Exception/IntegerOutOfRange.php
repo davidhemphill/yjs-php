@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Exception;
+namespace Hemp\Yjs\Exception;
 
-use Yjs\Binary\SafeInteger;
+use Hemp\Yjs\Binary\SafeInteger;
 
 /**
  * A variable-length integer did not fit the JavaScript-safe integer range that

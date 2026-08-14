@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Tests\Support;
+namespace Hemp\Yjs\Tests\Support;
 
+use Hemp\Yjs\Binary\AnyValue\BigInt;
+use Hemp\Yjs\Binary\AnyValue\Bytes;
+use Hemp\Yjs\Binary\AnyValue\Undefined;
 use RuntimeException;
 use stdClass;
-use Yjs\Binary\AnyValue\BigInt;
-use Yjs\Binary\AnyValue\Bytes;
-use Yjs\Binary\AnyValue\Undefined;
 
 /**
  * Reads the committed Profile 1 fixtures and turns their tagged value specs

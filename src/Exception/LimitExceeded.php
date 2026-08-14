@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Exception;
+namespace Hemp\Yjs\Exception;
 
 /**
  * A declared length, element count, nesting depth, or cumulative allocation

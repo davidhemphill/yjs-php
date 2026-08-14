@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Binary\AnyValue;
+namespace Hemp\Yjs\Binary\AnyValue;
 
 /**
  * A JavaScript `bigint`, written by lib0 as a signed 64-bit big-endian integer.

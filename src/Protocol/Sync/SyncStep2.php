@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Sync;
+namespace Hemp\Yjs\Protocol\Sync;
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Encoder;
-use Yjs\Exception\DecodeException;
-use Yjs\Update\Update;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Update\Update;
 
 /**
  * "Here is what you were missing" — the reply to a {@see SyncStep1}.

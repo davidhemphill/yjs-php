@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Wire\Content;
+namespace Hemp\Yjs\Wire\Content;
 
-use Yjs\Binary\Encoder;
+use Hemp\Yjs\Binary\Encoder;
 
 /**
  * The payload of an Item.

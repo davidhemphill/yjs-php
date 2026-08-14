@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Exception;
+namespace Hemp\Yjs\Exception;
 
 /**
  * A structurally decodable update that is not one we will accept.

@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Exception\DecodeException;
-use Yjs\Exception\InvalidUpdate;
-use Yjs\Id\ClockRange;
-use Yjs\Id\DeleteSet;
-use Yjs\Id\Id;
-use Yjs\Tests\Support\Fixtures;
-use Yjs\Update\ClientStructs;
-use Yjs\Update\SemanticLimits;
-use Yjs\Update\Update;
-use Yjs\Wire\Content\Text;
-use Yjs\Wire\Item;
-use Yjs\Wire\ParentReference;
-use Yjs\Wire\Skip;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Exception\InvalidUpdate;
+use Hemp\Yjs\Id\ClockRange;
+use Hemp\Yjs\Id\DeleteSet;
+use Hemp\Yjs\Id\Id;
+use Hemp\Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Update\ClientStructs;
+use Hemp\Yjs\Update\SemanticLimits;
+use Hemp\Yjs\Update\Update;
+use Hemp\Yjs\Wire\Content\Text;
+use Hemp\Yjs\Wire\Item;
+use Hemp\Yjs\Wire\ParentReference;
+use Hemp\Yjs\Wire\Skip;
 
 $item = fn (int $client, int $clock, string $text) => Item::compose(
     new Id($client, $clock),

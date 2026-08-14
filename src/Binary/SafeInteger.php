@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Binary;
+namespace Hemp\Yjs\Binary;
 
-use Yjs\Exception\IntegerOutOfRange;
+use Hemp\Yjs\Exception\IntegerOutOfRange;
 
 /**
  * Every client ID, clock, length, and count on the Yjs wire originates in a

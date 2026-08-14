@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Tests\Support\Fixtures;
-use Yjs\Tests\Support\PrimitiveGroups;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Tests\Support\PrimitiveGroups;
 
 /**
  * Every lib0 primitive, checked against bytes produced by the real lib0 build.

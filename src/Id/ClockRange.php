@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Id;
+namespace Hemp\Yjs\Id;
 
-use Yjs\Binary\SafeInteger;
-use Yjs\Exception\EncodeException;
+use Hemp\Yjs\Binary\SafeInteger;
+use Hemp\Yjs\Exception\EncodeException;
 
 /**
  * A half-open run of clocks belonging to one client: `[clock, clock + length)`.

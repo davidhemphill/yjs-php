@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\AnyValue\BigInt;
-use Yjs\Binary\AnyValue\Bytes;
-use Yjs\Binary\AnyValue\Undefined;
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Debug\CanonicalJson;
-use Yjs\Tests\Support\RandomValues;
+use Hemp\Yjs\Binary\AnyValue\BigInt;
+use Hemp\Yjs\Binary\AnyValue\Bytes;
+use Hemp\Yjs\Binary\AnyValue\Undefined;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Debug\CanonicalJson;
+use Hemp\Yjs\Tests\Support\RandomValues;
 
 it('renders each value distinguishably', function (mixed $value, string $expected) {
     expect(CanonicalJson::encode($value))->toBe($expected);

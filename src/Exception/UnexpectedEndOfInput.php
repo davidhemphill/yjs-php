@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Exception;
+namespace Hemp\Yjs\Exception;
 
 /**
  * The decoder needed more bytes than the input contained.

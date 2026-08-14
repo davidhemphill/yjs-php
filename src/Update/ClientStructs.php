@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Update;
+namespace Hemp\Yjs\Update;
 
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Id\Id;
-use Yjs\Wire\Content\ContentReader;
-use Yjs\Wire\Gc;
-use Yjs\Wire\Item;
-use Yjs\Wire\ParentReference;
-use Yjs\Wire\Skip;
-use Yjs\Wire\Struct;
-use Yjs\Wire\StructInfo;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Id\Id;
+use Hemp\Yjs\Wire\Content\ContentReader;
+use Hemp\Yjs\Wire\Gc;
+use Hemp\Yjs\Wire\Item;
+use Hemp\Yjs\Wire\ParentReference;
+use Hemp\Yjs\Wire\Skip;
+use Hemp\Yjs\Wire\Struct;
+use Hemp\Yjs\Wire\StructInfo;
 
 /**
  * One client's contiguous run of structs.

@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\SafeInteger;
-use Yjs\Exception\IntegerOutOfRange;
+use Hemp\Yjs\Binary\SafeInteger;
+use Hemp\Yjs\Exception\IntegerOutOfRange;
 
 it('knows the JavaScript safe integer boundaries', function () {
     expect(SafeInteger::MAX)->toBe(2 ** 53 - 1)

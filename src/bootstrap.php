@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-use Yjs\Environment;
+use Hemp\Yjs\Environment;
 
 Environment::assertSupported();

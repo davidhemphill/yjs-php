@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\Utf16;
-use Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Binary\Utf16;
+use Hemp\Yjs\Tests\Support\Fixtures;
 
 /**
  * The split Yjs performs when it cuts string content at a clock, checked

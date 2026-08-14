@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Id;
+namespace Hemp\Yjs\Id;
 
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Binary\SafeInteger;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Binary\SafeInteger;
 
 /**
  * How much of every client's history a peer already has: client to next

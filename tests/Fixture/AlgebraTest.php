@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Id\DeleteSet;
-use Yjs\Id\StateVector;
-use Yjs\Tests\Support\Fixtures;
-use Yjs\Update\Update;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Id\DeleteSet;
+use Hemp\Yjs\Id\StateVector;
+use Hemp\Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Update\Update;
 
 /**
  * The update algebra over the committed corpus.

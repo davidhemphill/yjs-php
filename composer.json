@@ -18,7 +18,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Yjs\\": "src/"
+            "Hemp\\Yjs\\": "src/"
         },
         "files": [
             "src/bootstrap.php"
@@ -26,7 +26,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Yjs\\Tests\\": "tests/"
+            "Hemp\\Yjs\\Tests\\": "tests/"
         }
     },
     "scripts": {

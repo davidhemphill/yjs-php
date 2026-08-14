@@ -11,12 +11,12 @@ declare(strict_types=1);
  * PHP still gets caught.
  */
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Encoder;
-use Yjs\Protocol\Awareness\AwarenessUpdate;
-use Yjs\Protocol\Sync\SyncMessageReader;
-use Yjs\Tests\Support\Fixtures;
-use Yjs\Tests\Support\PrimitiveGroups;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Protocol\Awareness\AwarenessUpdate;
+use Hemp\Yjs\Protocol\Sync\SyncMessageReader;
+use Hemp\Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Tests\Support\PrimitiveGroups;
 
 require __DIR__.'/../../vendor/autoload.php';
 

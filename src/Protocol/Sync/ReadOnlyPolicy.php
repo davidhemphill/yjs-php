@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Sync;
+namespace Hemp\Yjs\Protocol\Sync;
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Exception\DecodeException;
-use Yjs\Update\Update;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Update\Update;
 
 /**
  * Decides what a read-only session is allowed to send.

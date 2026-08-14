@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Debug;
+namespace Hemp\Yjs\Debug;
 
-use Yjs\Update\ClientStructs;
-use Yjs\Update\Update;
-use Yjs\Wire\Content\AnyValues;
-use Yjs\Wire\Content\Binary;
-use Yjs\Wire\Content\Content;
-use Yjs\Wire\Content\Deleted;
-use Yjs\Wire\Content\Embed;
-use Yjs\Wire\Content\Format;
-use Yjs\Wire\Content\Json;
-use Yjs\Wire\Content\SharedType;
-use Yjs\Wire\Content\SubDocument;
-use Yjs\Wire\Content\Text;
-use Yjs\Wire\Gc;
-use Yjs\Wire\Item;
-use Yjs\Wire\Skip;
-use Yjs\Wire\Struct;
+use Hemp\Yjs\Update\ClientStructs;
+use Hemp\Yjs\Update\Update;
+use Hemp\Yjs\Wire\Content\AnyValues;
+use Hemp\Yjs\Wire\Content\Binary;
+use Hemp\Yjs\Wire\Content\Content;
+use Hemp\Yjs\Wire\Content\Deleted;
+use Hemp\Yjs\Wire\Content\Embed;
+use Hemp\Yjs\Wire\Content\Format;
+use Hemp\Yjs\Wire\Content\Json;
+use Hemp\Yjs\Wire\Content\SharedType;
+use Hemp\Yjs\Wire\Content\SubDocument;
+use Hemp\Yjs\Wire\Content\Text;
+use Hemp\Yjs\Wire\Gc;
+use Hemp\Yjs\Wire\Item;
+use Hemp\Yjs\Wire\Skip;
+use Hemp\Yjs\Wire\Struct;
 
 /**
  * A readable rendering of a decoded update.

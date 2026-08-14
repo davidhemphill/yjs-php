@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Update;
+namespace Hemp\Yjs\Update;
 
-use Yjs\Wire\Struct;
+use Hemp\Yjs\Wire\Struct;
 
 /**
  * Collects merged structs into client sections, matching Yjs's

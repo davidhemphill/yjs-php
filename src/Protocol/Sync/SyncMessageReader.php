@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Sync;
+namespace Hemp\Yjs\Protocol\Sync;
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Decoder;
-use Yjs\Exception\DecodeException;
-use Yjs\Exception\MalformedInput;
-use Yjs\Id\StateVector;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Exception\MalformedInput;
+use Hemp\Yjs\Id\StateVector;
 
 /**
  * Reads y-protocols sync messages off the wire.

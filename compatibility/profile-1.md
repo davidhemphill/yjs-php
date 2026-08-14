@@ -30,7 +30,7 @@ Consumed by, but not exercised in this repository:
 | `y-prosemirror` | 1.3.7 |
 
 Runtime: PHP 8.4, 64-bit only. The 64-bit requirement is enforced at load time
-by `Yjs\Environment`, because on a 32-bit build a clock past 2^31 would promote
+by `Hemp\Yjs\Environment`, because on a 32-bit build a clock past 2^31 would promote
 to a float and the decoder would keep running while returning wrong answers.
 
 ## Fixture generation
@@ -278,7 +278,7 @@ lib0 has no equivalent, because it is not the thing facing the socket.
 
 ### Decode failures are typed
 
-Every failure below `Yjs\Exception\DecodeException` — truncation, out-of-range
+Every failure below `Hemp\Yjs\Exception\DecodeException` — truncation, out-of-range
 integers, exceeded limits, malformed input. Nothing warns, returns `false`, or
 escapes as a `TypeError`. This is asserted by the fuzz suite rather than only
 promised here.
@@ -291,16 +291,16 @@ re-encodes to identical bytes.
 
 | lib0 `any` tag | PHP value |
 |---|---|
-| `undefined` (127) | `Yjs\Binary\AnyValue\Undefined::instance()` |
+| `undefined` (127) | `Hemp\Yjs\Binary\AnyValue\Undefined::instance()` |
 | `null` (126) | `null` |
 | integer (125) | `int`, or `-0.0` for the negative zero encoding |
 | float32 (124), float64 (123) | `float` |
-| bigint (122) | `Yjs\Binary\AnyValue\BigInt` |
+| bigint (122) | `Hemp\Yjs\Binary\AnyValue\BigInt` |
 | boolean (121, 120) | `bool` |
 | string (119) | `string`, valid UTF-8 |
 | object (118) | `stdClass` |
 | array (117) | PHP list |
-| `Uint8Array` (116) | `Yjs\Binary\AnyValue\Bytes` |
+| `Uint8Array` (116) | `Hemp\Yjs\Binary\AnyValue\Bytes` |
 
 Three consequences worth stating plainly:
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Id;
+namespace Hemp\Yjs\Id;
 
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Binary\SafeInteger;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Binary\SafeInteger;
 
 /**
  * A position in one client's history: which client wrote it, and when.

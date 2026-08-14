@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Wire;
+namespace Hemp\Yjs\Wire;
 
 /**
  * The layout of a struct's leading info byte.

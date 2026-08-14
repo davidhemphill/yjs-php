@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Wire;
+namespace Hemp\Yjs\Wire;
 
-use Yjs\Binary\Encoder;
-use Yjs\Exception\EncodeException;
-use Yjs\Id\Id;
-use Yjs\Wire\Content\Content;
-use Yjs\Wire\Content\Sliceable;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Exception\EncodeException;
+use Hemp\Yjs\Id\Id;
+use Hemp\Yjs\Wire\Content\Content;
+use Hemp\Yjs\Wire\Content\Sliceable;
 
 /**
  * A struct carrying content, together with the references that place it.

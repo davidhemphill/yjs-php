@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs;
+namespace Hemp\Yjs;
 
-use Yjs\Exception\UnsupportedPlatform;
+use Hemp\Yjs\Exception\UnsupportedPlatform;
 
 /**
  * The platform assumptions this library is allowed to make.

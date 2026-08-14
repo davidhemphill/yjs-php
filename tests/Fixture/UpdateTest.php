@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Id\StateVector;
-use Yjs\Tests\Support\Fixtures;
-use Yjs\Update\Update;
-use Yjs\Wire\Content\SubDocument;
-use Yjs\Wire\Gc;
-use Yjs\Wire\Item;
-use Yjs\Wire\Skip;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Id\StateVector;
+use Hemp\Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Update\Update;
+use Hemp\Yjs\Wire\Content\SubDocument;
+use Hemp\Yjs\Wire\Gc;
+use Hemp\Yjs\Wire\Item;
+use Hemp\Yjs\Wire\Skip;
 
 /**
  * Whole Yjs V1 updates, checked against updates built by the real Yjs.

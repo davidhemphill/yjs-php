@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Exception\DecodeException;
-use Yjs\Exception\MalformedInput;
-use Yjs\Id\StateVector;
-use Yjs\Protocol\Sync\ReadOnlyPolicy;
-use Yjs\Protocol\Sync\SyncAdmission;
-use Yjs\Protocol\Sync\SyncMessageReader;
-use Yjs\Protocol\Sync\SyncStep1;
-use Yjs\Protocol\Sync\SyncStep2;
-use Yjs\Protocol\Sync\SyncUpdate;
-use Yjs\Tests\Support\Fixtures;
-use Yjs\Update\Update;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Exception\MalformedInput;
+use Hemp\Yjs\Id\StateVector;
+use Hemp\Yjs\Protocol\Sync\ReadOnlyPolicy;
+use Hemp\Yjs\Protocol\Sync\SyncAdmission;
+use Hemp\Yjs\Protocol\Sync\SyncMessageReader;
+use Hemp\Yjs\Protocol\Sync\SyncStep1;
+use Hemp\Yjs\Protocol\Sync\SyncStep2;
+use Hemp\Yjs\Protocol\Sync\SyncUpdate;
+use Hemp\Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Update\Update;
 
 /**
  * The decision table for a session that may read a document but not write it.

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Exception\DecodeException;
-use Yjs\Exception\LimitExceeded;
-use Yjs\Exception\MalformedInput;
-use Yjs\Tests\Support\Fixtures;
-use Yjs\Tests\Support\RandomValues;
-use Yjs\Update\Update;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Exception\LimitExceeded;
+use Hemp\Yjs\Exception\MalformedInput;
+use Hemp\Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Tests\Support\RandomValues;
+use Hemp\Yjs\Update\Update;
 
 /**
  * The update reader against malformed input.

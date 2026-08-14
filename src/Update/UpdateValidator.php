@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Update;
+namespace Hemp\Yjs\Update;
 
-use Yjs\Exception\InvalidUpdate;
+use Hemp\Yjs\Exception\InvalidUpdate;
 
 /**
  * Checks that a decoded update is one we are willing to work with.

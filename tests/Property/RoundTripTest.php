@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\AnyValue\BigInt;
-use Yjs\Binary\AnyValue\Bytes;
-use Yjs\Binary\AnyValue\Undefined;
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Binary\SafeInteger;
-use Yjs\Binary\Utf16;
-use Yjs\Exception\EncodeException;
-use Yjs\Tests\Support\RandomValues;
-use Yjs\Tests\Support\ValueComparison;
+use Hemp\Yjs\Binary\AnyValue\BigInt;
+use Hemp\Yjs\Binary\AnyValue\Bytes;
+use Hemp\Yjs\Binary\AnyValue\Undefined;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Binary\SafeInteger;
+use Hemp\Yjs\Binary\Utf16;
+use Hemp\Yjs\Exception\EncodeException;
+use Hemp\Yjs\Tests\Support\RandomValues;
+use Hemp\Yjs\Tests\Support\ValueComparison;
 
 /**
  * Randomized round-trip properties over the primitives.

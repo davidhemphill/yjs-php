@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Tests\Support;
+namespace Hemp\Yjs\Tests\Support;
 
 use Closure;
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
 
 /**
  * The mapping from a fixture group to the reader and writer it exercises.

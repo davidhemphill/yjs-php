@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Exception;
+namespace Hemp\Yjs\Exception;
 
 use InvalidArgumentException;
 

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Sync;
+namespace Hemp\Yjs\Protocol\Sync;
 
-use Yjs\Binary\Encoder;
+use Hemp\Yjs\Binary\Encoder;
 
 /**
  * A y-protocols sync message.

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Wire\Content;
+namespace Hemp\Yjs\Wire\Content;
 
-use Yjs\Binary\Decoder;
-use Yjs\Exception\MalformedInput;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Exception\MalformedInput;
 
 /**
  * Reads an Item's content by its reference number.

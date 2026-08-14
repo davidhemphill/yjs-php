@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Wire\Content;
+namespace Hemp\Yjs\Wire\Content;
 
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
 
 /**
  * Content ref 8 — a list of lib0 `any` values, one clock each.

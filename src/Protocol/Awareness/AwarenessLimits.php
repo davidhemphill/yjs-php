@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Awareness;
+namespace Hemp\Yjs\Protocol\Awareness;
 
 /**
  * Bounds on awareness, which is the easiest part of the protocol to abuse.

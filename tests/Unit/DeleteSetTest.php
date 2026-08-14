@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Yjs\Id\ClockRange;
-use Yjs\Id\DeleteSet;
+use Hemp\Yjs\Id\ClockRange;
+use Hemp\Yjs\Id\DeleteSet;
 
 /**
  * Delete sets are the one structure in a Yjs document guaranteed to grow

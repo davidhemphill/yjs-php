@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Sync;
+namespace Hemp\Yjs\Protocol\Sync;
 
-use Yjs\Binary\Encoder;
-use Yjs\Id\StateVector;
-use Yjs\Update\Update;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Id\StateVector;
+use Hemp\Yjs\Update\Update;
 
 /**
  * "Here is what I already have."

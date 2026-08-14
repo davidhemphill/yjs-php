@@ -62,7 +62,7 @@ it('imports only its own namespace and PHP built-ins', function (string $file) {
     // installs is required by PSR-4 to sit under a vendor namespace. So an
     // import that contains a separator and is not ours came from a package,
     // which is the thing this package must not acquire.
-    $foreign = array_values(array_filter($matches[1], fn (string $imported): bool => ! str_starts_with($imported, 'Yjs\\')
+    $foreign = array_values(array_filter($matches[1], fn (string $imported): bool => ! str_starts_with($imported, 'Hemp\Yjs\\')
         && (str_contains($imported, '\\') || ! (class_exists($imported) || interface_exists($imported)))));
 
     expect($foreign)->toBe([], "{$file} imports something that is neither ours nor a PHP built-in.");

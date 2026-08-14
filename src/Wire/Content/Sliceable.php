@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Wire\Content;
+namespace Hemp\Yjs\Wire\Content;
 
 /**
  * Content that spans more than one clock and can therefore be split.

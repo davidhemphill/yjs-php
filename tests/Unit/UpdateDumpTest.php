@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Debug\UpdateDump;
-use Yjs\Tests\Support\Fixtures;
-use Yjs\Update\Update;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Debug\UpdateDump;
+use Hemp\Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Update\Update;
 
 $decode = fn (string $name) => Update::decode(
     base64_decode(Fixtures::cases('updates')[$name]['update'], strict: true),

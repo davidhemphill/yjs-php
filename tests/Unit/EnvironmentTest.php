@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Yjs\Environment;
+use Hemp\Yjs\Environment;
 
 it('runs on a 64-bit build', function () {
     expect(Environment::is64Bit())->toBeTrue()

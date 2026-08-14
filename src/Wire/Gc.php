@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Wire;
+namespace Hemp\Yjs\Wire;
 
-use Yjs\Binary\Encoder;
-use Yjs\Binary\SafeInteger;
-use Yjs\Id\Id;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Binary\SafeInteger;
+use Hemp\Yjs\Id\Id;
 
 /**
  * Space whose content has been garbage collected: the clocks are still spoken

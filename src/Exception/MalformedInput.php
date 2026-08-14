@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Exception;
+namespace Hemp\Yjs\Exception;
 
 /**
  * The bytes were structurally readable but did not describe anything valid:

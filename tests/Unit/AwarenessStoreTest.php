@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Yjs\Exception\DecodeException;
-use Yjs\Exception\LimitExceeded;
-use Yjs\Protocol\Awareness\AwarenessEntry;
-use Yjs\Protocol\Awareness\AwarenessLimits;
-use Yjs\Protocol\Awareness\AwarenessStore;
-use Yjs\Protocol\Awareness\AwarenessUpdate;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Exception\LimitExceeded;
+use Hemp\Yjs\Protocol\Awareness\AwarenessEntry;
+use Hemp\Yjs\Protocol\Awareness\AwarenessLimits;
+use Hemp\Yjs\Protocol\Awareness\AwarenessStore;
+use Hemp\Yjs\Protocol\Awareness\AwarenessUpdate;
 
 $update = fn (array ...$entries) => new AwarenessUpdate(
     array_map(fn (array $entry) => new AwarenessEntry(...$entry), $entries),

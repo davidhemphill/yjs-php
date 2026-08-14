@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Binary\AnyValue;
+namespace Hemp\Yjs\Binary\AnyValue;
 
 /**
  * JavaScript's `undefined`, which PHP has no value for.

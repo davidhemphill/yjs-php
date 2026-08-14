@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Binary;
+namespace Hemp\Yjs\Binary;
 
-use Yjs\Exception\EncodeException;
+use Hemp\Yjs\Exception\EncodeException;
 
 /**
  * Yjs measures string content in UTF-16 code units because that is what a

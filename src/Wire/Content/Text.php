@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Wire\Content;
+namespace Hemp\Yjs\Wire\Content;
 
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Binary\Utf16;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Binary\Utf16;
 
 /**
  * Content ref 4 — text, occupying one clock per UTF-16 code unit.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Binary;
+namespace Hemp\Yjs\Binary;
 
 /**
  * Bounds applied to a single decode pass over untrusted bytes.

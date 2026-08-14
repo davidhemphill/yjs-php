@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Update;
+namespace Hemp\Yjs\Update;
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Exception\InvalidUpdate;
-use Yjs\Id\ClockRange;
-use Yjs\Id\DeleteSet;
-use Yjs\Id\StateVector;
-use Yjs\Wire\Skip;
-use Yjs\Wire\Struct;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Exception\InvalidUpdate;
+use Hemp\Yjs\Id\ClockRange;
+use Hemp\Yjs\Id\DeleteSet;
+use Hemp\Yjs\Id\StateVector;
+use Hemp\Yjs\Wire\Skip;
+use Hemp\Yjs\Wire\Struct;
 
 /**
  * A decoded Yjs V1 update: struct sections followed by a delete set.

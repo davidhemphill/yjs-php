@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Exception\DecodeException;
-use Yjs\Exception\LimitExceeded;
-use Yjs\Tests\Support\RandomValues;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Exception\LimitExceeded;
+use Hemp\Yjs\Tests\Support\RandomValues;
 
 /**
  * Bounded failure on input nobody vetted.

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Wire;
+namespace Hemp\Yjs\Wire;
 
-use Yjs\Binary\Encoder;
-use Yjs\Id\Id;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Id\Id;
 
 /**
  * One record in a client's struct section.

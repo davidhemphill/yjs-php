@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Update;
+namespace Hemp\Yjs\Update;
 
-use Yjs\Id\DeleteSet;
-use Yjs\Id\Id;
-use Yjs\Wire\Gc;
-use Yjs\Wire\Skip;
-use Yjs\Wire\Struct;
+use Hemp\Yjs\Id\DeleteSet;
+use Hemp\Yjs\Id\Id;
+use Hemp\Yjs\Wire\Gc;
+use Hemp\Yjs\Wire\Skip;
+use Hemp\Yjs\Wire\Struct;
 
 /**
  * Combines updates into one, reproducing Yjs's `mergeUpdates`.

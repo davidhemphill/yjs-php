@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Binary;
+namespace Hemp\Yjs\Binary;
 
 /**
  * The lib0 "any" type tags, exactly as `writeAny` emits them.

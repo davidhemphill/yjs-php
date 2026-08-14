@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Yjs\Tests\Support\ValueComparison;
+use Hemp\Yjs\Tests\Support\ValueComparison;
 
 /**
  * Assert value equality with `Object.is` semantics — see ValueComparison for

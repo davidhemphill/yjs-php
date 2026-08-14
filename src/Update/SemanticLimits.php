@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Update;
+namespace Hemp\Yjs\Update;
 
-use Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\DecodeLimits;
 
 /**
  * Bounds on what a decoded update is allowed to *be*, as opposed to how many

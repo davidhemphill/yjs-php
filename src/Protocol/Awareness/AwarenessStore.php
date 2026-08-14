@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Awareness;
+namespace Hemp\Yjs\Protocol\Awareness;
 
-use Yjs\Exception\LimitExceeded;
+use Hemp\Yjs\Exception\LimitExceeded;
 
 /**
  * Who is currently present in a document, and how recently each said so.

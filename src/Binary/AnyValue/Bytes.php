@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Binary\AnyValue;
+namespace Hemp\Yjs\Binary\AnyValue;
 
 /**
  * A JavaScript `Uint8Array` inside an "any" value.

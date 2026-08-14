@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\Utf16;
-use Yjs\Exception\EncodeException;
-use Yjs\Tests\Support\Fixtures;
+use Hemp\Yjs\Binary\Utf16;
+use Hemp\Yjs\Exception\EncodeException;
+use Hemp\Yjs\Tests\Support\Fixtures;
 
 /**
  * The UTF-16 helpers, checked against lengths and slices taken in JavaScript.

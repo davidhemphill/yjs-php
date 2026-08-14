@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Tests\Support;
+namespace Hemp\Yjs\Tests\Support;
 
+use Hemp\Yjs\Binary\AnyValue\BigInt;
+use Hemp\Yjs\Binary\AnyValue\Bytes;
+use Hemp\Yjs\Binary\AnyValue\Undefined;
 use stdClass;
-use Yjs\Binary\AnyValue\BigInt;
-use Yjs\Binary\AnyValue\Bytes;
-use Yjs\Binary\AnyValue\Undefined;
 
 /**
  * Value equality with JavaScript's `Object.is` semantics.

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Update;
+namespace Hemp\Yjs\Update;
 
-use Yjs\Id\StateVector;
-use Yjs\Wire\Skip;
-use Yjs\Wire\Struct;
+use Hemp\Yjs\Id\StateVector;
+use Hemp\Yjs\Wire\Skip;
+use Hemp\Yjs\Wire\Struct;
 
 /**
  * Reduces an update to the part a peer is missing, the way `diffUpdate` does.

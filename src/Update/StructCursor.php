@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Update;
+namespace Hemp\Yjs\Update;
 
-use Yjs\Wire\Skip;
-use Yjs\Wire\Struct;
+use Hemp\Yjs\Wire\Skip;
+use Hemp\Yjs\Wire\Struct;
 
 /**
  * A read position in one update's struct stream, matching Yjs's

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Binary;
+namespace Hemp\Yjs\Binary;
 
+use Hemp\Yjs\Binary\AnyValue\BigInt;
+use Hemp\Yjs\Binary\AnyValue\Bytes;
+use Hemp\Yjs\Binary\AnyValue\Undefined;
+use Hemp\Yjs\Exception\EncodeException;
 use stdClass;
-use Yjs\Binary\AnyValue\BigInt;
-use Yjs\Binary\AnyValue\Bytes;
-use Yjs\Binary\AnyValue\Undefined;
-use Yjs\Exception\EncodeException;
 
 /**
  * Writes the lib0 primitives that the Yjs V1 update format is built from.

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Sync;
+namespace Hemp\Yjs\Protocol\Sync;
 
 /**
  * The three y-protocols sync messages.

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Awareness;
+namespace Hemp\Yjs\Protocol\Awareness;
 
-use Yjs\Binary\SafeInteger;
+use Hemp\Yjs\Binary\SafeInteger;
 
 /**
  * One client's awareness state at one clock.

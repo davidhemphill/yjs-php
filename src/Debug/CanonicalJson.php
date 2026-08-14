@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Debug;
+namespace Hemp\Yjs\Debug;
 
+use Hemp\Yjs\Binary\AnyValue\BigInt;
+use Hemp\Yjs\Binary\AnyValue\Bytes;
+use Hemp\Yjs\Binary\AnyValue\Undefined;
+use Hemp\Yjs\Exception\EncodeException;
 use JsonException;
 use stdClass;
-use Yjs\Binary\AnyValue\BigInt;
-use Yjs\Binary\AnyValue\Bytes;
-use Yjs\Binary\AnyValue\Undefined;
-use Yjs\Exception\EncodeException;
 
 /**
  * A stable, unambiguous JSON rendering of a decoded value.

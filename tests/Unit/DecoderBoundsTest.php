@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Exception\DecodeException;
-use Yjs\Exception\IntegerOutOfRange;
-use Yjs\Exception\LimitExceeded;
-use Yjs\Exception\MalformedInput;
-use Yjs\Exception\UnexpectedEndOfInput;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Exception\IntegerOutOfRange;
+use Hemp\Yjs\Exception\LimitExceeded;
+use Hemp\Yjs\Exception\MalformedInput;
+use Hemp\Yjs\Exception\UnexpectedEndOfInput;
 
 /**
  * The decoder's behavior on input that is truncated, oversized, or hostile.

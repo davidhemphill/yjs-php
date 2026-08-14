@@ -13,9 +13,9 @@ declare(strict_types=1);
  * Output: {"results": [{"id": 1, "update": "<base64>"}, ...]}
  */
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Id\StateVector;
-use Yjs\Update\Update;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Id\StateVector;
+use Hemp\Yjs\Update\Update;
 
 require __DIR__.'/../../vendor/autoload.php';
 

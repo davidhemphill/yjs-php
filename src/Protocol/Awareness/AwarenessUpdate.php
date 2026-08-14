@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Yjs\Protocol\Awareness;
+namespace Hemp\Yjs\Protocol\Awareness;
 
-use Yjs\Binary\DecodeLimits;
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Exception\DecodeException;
-use Yjs\Exception\LimitExceeded;
+use Hemp\Yjs\Binary\DecodeLimits;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Exception\DecodeException;
+use Hemp\Yjs\Exception\LimitExceeded;
 
 /**
  * A y-protocols awareness update: a list of clients, each with a clock and a

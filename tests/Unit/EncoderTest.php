@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-use Yjs\Binary\AnyValue\BigInt;
-use Yjs\Binary\AnyValue\Bytes;
-use Yjs\Binary\AnyValue\Undefined;
-use Yjs\Binary\Decoder;
-use Yjs\Binary\Encoder;
-use Yjs\Exception\EncodeException;
+use Hemp\Yjs\Binary\AnyValue\BigInt;
+use Hemp\Yjs\Binary\AnyValue\Bytes;
+use Hemp\Yjs\Binary\AnyValue\Undefined;
+use Hemp\Yjs\Binary\Decoder;
+use Hemp\Yjs\Binary\Encoder;
+use Hemp\Yjs\Exception\EncodeException;
 
 describe('input validation', function () {
     it('refuses a negative varUint', function () {
