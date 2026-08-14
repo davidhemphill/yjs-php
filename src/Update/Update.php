@@ -7,7 +7,11 @@ namespace Yjs\Update;
 use Yjs\Binary\DecodeLimits;
 use Yjs\Binary\Decoder;
 use Yjs\Binary\Encoder;
+use Yjs\Exception\InvalidUpdate;
+use Yjs\Id\ClockRange;
 use Yjs\Id\DeleteSet;
+use Yjs\Id\StateVector;
+use Yjs\Wire\Skip;
 use Yjs\Wire\Struct;
 
 /**
@@ -89,6 +93,138 @@ final class Update
     public function encode(): string
     {
         return $this->write(new Encoder)->toBytes();
+    }
+
+    /**
+     * Check that this update is structurally sound and within policy.
+     *
+     * @throws InvalidUpdate
+     */
+    public function validate(?SemanticLimits $limits = null): self
+    {
+        UpdateValidator::validate($this, $limits);
+
+        return $this;
+    }
+
+    /**
+     * How much of each client's history this update carries.
+     *
+     * Only the contiguous prefix counts, and a client whose prefix is empty is
+     * left out entirely rather than recorded as zero — both matching
+     * `encodeStateVectorFromUpdate`. See {@see ClientStructs::contiguousEndClock()}
+     * for why a gap ends the count.
+     */
+    public function stateVector(): StateVector
+    {
+        $vector = StateVector::empty();
+
+        foreach ($this->sections as $section) {
+            $clock = $section->contiguousEndClock();
+
+            if ($clock !== 0) {
+                $vector = $vector->raisedTo($section->client, $clock);
+            }
+        }
+
+        return $vector;
+    }
+
+    /**
+     * Combine this update with others into one.
+     */
+    public function merge(self ...$others): self
+    {
+        return UpdateMerger::merge($this, ...$others);
+    }
+
+    /**
+     * Combine any number of updates, including none.
+     */
+    public static function mergeAll(self ...$updates): self
+    {
+        return UpdateMerger::merge(...$updates);
+    }
+
+    /**
+     * The part of this update a peer with the given state vector is missing.
+     */
+    public function diff(StateVector $have): self
+    {
+        return UpdateDiffer::diff($this, $have);
+    }
+
+    /**
+     * Whether this update already accounts for everything in another one.
+     *
+     * The question a read-only session has to answer: a client that cannot
+     * write still completes a sync handshake and will happily send back state
+     * it believes we need. If that state is entirely redundant the handshake
+     * can be acknowledged; if any of it is new, the client is introducing
+     * document state it is not allowed to introduce.
+     *
+     * Skips are ignored on both sides. A skip asserts a hole in the sender's
+     * knowledge rather than any document content, so it neither needs covering
+     * nor covers anything.
+     */
+    public function contains(self $other): bool
+    {
+        $coverage = $this->coverage();
+
+        foreach ($other->sections as $section) {
+            foreach ($section->structs as $struct) {
+                if ($struct instanceof Skip || $struct->length() === 0) {
+                    continue;
+                }
+
+                $range = new ClockRange($struct->id()->clock, $struct->length());
+
+                if (! self::covers($coverage[$section->client] ?? [], $range)) {
+                    return false;
+                }
+            }
+        }
+
+        return $other->deleteSet->isSubsetOf($this->deleteSet);
+    }
+
+    /**
+     * The clock ranges this update actually carries content for, per client,
+     * coalesced so that adjacent structs read as one run.
+     *
+     * @return array<int, list<ClockRange>>
+     */
+    public function coverage(): array
+    {
+        $ranges = [];
+
+        foreach ($this->sections as $section) {
+            foreach ($section->structs as $struct) {
+                if ($struct instanceof Skip || $struct->length() === 0) {
+                    continue;
+                }
+
+                $ranges[$section->client][] = new ClockRange($struct->id()->clock, $struct->length());
+            }
+        }
+
+        // Reuse the delete set's coalescing, which is the same problem: fold a
+        // list of ranges into the fewest that describe it.
+        return DeleteSet::fromArray($ranges)->normalized()->toArray();
+    }
+
+    /**
+     * @param  list<ClockRange>  $ranges  Already coalesced.
+     */
+    private static function covers(array $ranges, ClockRange $needle): bool
+    {
+        foreach ($ranges as $range) {
+            if ($range->containsRange($needle)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

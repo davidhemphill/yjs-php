@@ -38,4 +38,28 @@ final class Skip implements Struct
     {
         $encoder->writeUint8(StructInfo::SKIP_REF)->writeVarUint($this->length);
     }
+
+    /**
+     * Nothing to normalize: only an Item derives its info byte from fields.
+     */
+    public function normalized(): Struct
+    {
+        return $this;
+    }
+
+    public function sliceFrom(int $offset): Struct
+    {
+        return new self($this->id->advanced($offset), $this->length - $offset);
+    }
+
+    /**
+     * Extend this skip to cover a further run of clocks.
+     *
+     * Two adjacent gaps are one gap. Yjs coalesces them while merging, and a
+     * skip that stayed split would encode differently for the same meaning.
+     */
+    public function extendedBy(int $length): self
+    {
+        return new self($this->id, $this->length + $length);
+    }
 }

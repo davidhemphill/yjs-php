@@ -20,8 +20,19 @@ use Yjs\Binary\Encoder;
  * place of a value JSON cannot represent. It is not valid JSON and is not meant
  * to be read as any.
  */
-final class Json implements Content
+final class Json implements Sliceable
 {
+    /**
+     * @return array{0: Content, 1: Content}
+     */
+    public function split(int $offset): array
+    {
+        return [
+            new self(array_slice($this->encoded, 0, $offset)),
+            new self(array_slice($this->encoded, $offset)),
+        ];
+    }
+
     /**
      * The marker Yjs writes for a value JSON has no syntax for.
      */

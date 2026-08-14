@@ -180,6 +180,56 @@ final class DeleteSet
     }
 
     /**
+     * Combine delete sets the way `mergeUpdates` does.
+     *
+     * Distinct from {@see self::union()} in what it leaves alone: a client that
+     * appears with no ranges stays, and a zero-length range survives the
+     * coalescing pass. Yjs keeps both, so a merge that dropped them would not
+     * reproduce its bytes. {@see self::normalized()} is the form to reach for
+     * when the question is what the set means rather than what it said.
+     */
+    public static function mergedFrom(self ...$sets): self
+    {
+        $combined = [];
+
+        foreach ($sets as $set) {
+            foreach ($set->ranges as $client => $clientRanges) {
+                $combined[$client] = [...($combined[$client] ?? []), ...$clientRanges];
+            }
+        }
+
+        return new self(array_map(self::sortAndCoalesce(...), $combined));
+    }
+
+    /**
+     * Yjs's `sortAndMergeDeleteSet`: sort by clock, then fold a range into its
+     * predecessor whenever they touch or overlap.
+     *
+     * @param  list<ClockRange>  $ranges
+     * @return list<ClockRange>
+     */
+    private static function sortAndCoalesce(array $ranges): array
+    {
+        usort($ranges, fn (ClockRange $left, ClockRange $right) => $left->clock <=> $right->clock);
+
+        $coalesced = [];
+
+        foreach ($ranges as $range) {
+            $last = array_key_last($coalesced);
+
+            if ($last !== null && $coalesced[$last]->end() >= $range->clock) {
+                $coalesced[$last] = $coalesced[$last]->merge($range);
+
+                continue;
+            }
+
+            $coalesced[] = $range;
+        }
+
+        return $coalesced;
+    }
+
+    /**
      * Everything deleted in either set.
      */
     public function union(self $other): self

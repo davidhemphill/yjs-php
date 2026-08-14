@@ -15,8 +15,24 @@ use Yjs\Binary\Utf16;
  * a flat one, and the only one where PHP's natural measure is the wrong one. An
  * emoji is one PHP code point, four UTF-8 bytes, and two clocks.
  */
-final class Text implements Content
+final class Text implements Sliceable
 {
+    /**
+     * Split at a UTF-16 offset, the way Yjs splits string content.
+     *
+     * {@see Utf16::split()} carries the surrogate-pair handling: a boundary
+     * inside a pair becomes U+FFFD on both sides, which damages the character
+     * but leaves each half exactly as long as the clocks require.
+     *
+     * @return array{0: Content, 1: Content}
+     */
+    public function split(int $offset): array
+    {
+        [$left, $right] = Utf16::split($this->text, $offset);
+
+        return [new self($left), new self($right)];
+    }
+
     public function __construct(public readonly string $text) {}
 
     public static function read(Decoder $decoder): self

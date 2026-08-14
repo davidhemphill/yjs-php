@@ -12,8 +12,16 @@ use Yjs\Binary\SafeInteger;
  * Content ref 1 — a run of deleted clocks that kept its span but lost its
  * payload.
  */
-final class Deleted implements Content
+final class Deleted implements Sliceable
 {
+    /**
+     * @return array{0: Content, 1: Content}
+     */
+    public function split(int $offset): array
+    {
+        return [new self($offset), new self($this->length - $offset)];
+    }
+
     public function __construct(public readonly int $length)
     {
         SafeInteger::assertNonNegative($length);

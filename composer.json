@@ -38,7 +38,8 @@
             "@test:unit"
         ],
         "fixtures": "node tools/oracle/generate-fixtures.mjs",
-        "fixtures:verify": "node tools/oracle/verify-php-output.mjs"
+        "fixtures:verify": "node tools/oracle/verify-php-output.mjs",
+        "oracle": "node tools/oracle/differential.mjs"
     },
     "config": {
         "sort-packages": true,

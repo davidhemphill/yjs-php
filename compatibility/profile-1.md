@@ -78,10 +78,64 @@ decoded with `Y.decodeUpdate`:
 - all nine content references, with nested shared-type metadata carried opaquely
 - the conditional origin, right-origin, parent, and parentSub fields
 
-Not yet implemented — later phases, not gaps in this one:
+## What Phase 3 covers
 
-- merge, diff, and state vector extraction from an update (Phase 3)
+The binary update algebra, verified against Yjs by differential testing rather
+than by fixtures:
+
+- `Update::stateVector()` — `encodeStateVectorFromUpdate`
+- `Update::merge()` / `mergeAll()` — `mergeUpdates`
+- `Update::diff()` — `diffUpdate`
+- struct slicing at clock boundaries, including UTF-16 content
+- `Update::contains()` — the redundancy check a read-only session needs
+- `Update::validate()` — structural invariants and configurable semantic limits
+
+Merge and diff are **byte-identical to Yjs**, not merely equivalent. That is a
+stronger claim than the roadmap asks for, and it was worth the extra work:
+matching bytes means a disagreement is a bug rather than a judgement call.
+
+Not yet implemented — a later phase, not a gap in this one:
+
 - the y-protocols sync and awareness codecs (Phase 4)
+
+### How the algebra is checked
+
+`node tools/oracle/differential.mjs` builds randomized three-client histories
+with the real Yjs, has PHP merge and diff them, and applies the results to real
+Yjs documents to compare against Yjs's own answers. Every scenario comes from a
+seed, so a failure reproduces exactly; a seed that ever fails belongs in the
+default list permanently.
+
+Fixtures cannot do this job. Encoding has one right answer, so bytes suffice;
+merging does not, and an implementation can be wrong in a way that still
+round-trips and only surfaces later as two clients disagreeing about the text.
+
+### Three things the algebra does that look wrong
+
+**Adjacent Items are never coalesced.** `Item.mergeWith` requires
+`this.right === right`, a link that exists only inside a materialized document.
+Structs decoded from an update always have a null right pointer, so the check
+cannot pass and Yjs leaves adjacent Items separate too. GC and Skip do coalesce.
+
+**Merging normalizes the info byte; relaying does not.** Yjs derives an Item's
+info byte from its fields on every write, so a rewrite drops a `parentSub` bit
+whose field was never on the wire (see the Phase 2 note). A plain
+decode/encode must preserve it; merge and diff must not. Both behaviors are
+asserted.
+
+**Merging is not the same as applying updates one after another.** Integrating
+sequentially splits items where merging does not, and a split that lands inside
+a surrogate pair replaces it with two U+FFFD. So a merged update can preserve an
+emoji that sequential application destroys. Yjs behaves identically; the oracle
+counts these cases rather than failing on them, and reports the count so a sharp
+rise is visible.
+
+### The delete set is never filtered by a state vector
+
+A state vector counts a client's structs, and a deletion is not a struct, so
+there is no way to know which tombstones a peer already holds. `diffUpdate`
+copies the delete set whole, and so does this. Sending them all is cheap and
+idempotent; dropping one would resurrect deleted text.
 
 ### Content reference map
 

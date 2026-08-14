@@ -90,3 +90,11 @@ jobs:
 
       - name: Check that lib0 can decode PHP's output
         run: node tools/oracle/verify-php-output.mjs
+
+      # The update algebra cannot be checked by comparing bytes to a fixture,
+      # because several different updates can describe the same document. This
+      # builds randomized multi-client histories, has PHP merge and diff them,
+      # and applies the results with the real Yjs to see whether the documents
+      # agree with the ones Yjs produces for itself.
+      - name: Run the differential oracle
+        run: node tools/oracle/differential.mjs --rounds 40

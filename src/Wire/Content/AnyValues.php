@@ -14,8 +14,19 @@ use Yjs\Binary\Encoder;
  * which round-trips byte-identically through PHP. So these values are decoded
  * rather than kept as text.
  */
-final class AnyValues implements Content
+final class AnyValues implements Sliceable
 {
+    /**
+     * @return array{0: Content, 1: Content}
+     */
+    public function split(int $offset): array
+    {
+        return [
+            new self(array_slice($this->values, 0, $offset)),
+            new self(array_slice($this->values, $offset)),
+        ];
+    }
+
     /**
      * @param  list<mixed>  $values
      */
