@@ -29,8 +29,11 @@ jobs:
           extensions: mbstring
           coverage: none
 
+      # A block scalar, because the ternary's ": " would otherwise read as a
+      # nested YAML mapping and the whole workflow would be rejected.
       - name: Confirm a 64-bit runtime
-        run: php -r 'exit(PHP_INT_SIZE >= 8 ? 0 : 1);'
+        run: |
+          php -r 'exit(PHP_INT_SIZE >= 8 ? 0 : 1);'
 
       - uses: ramsey/composer-install@v3
 
