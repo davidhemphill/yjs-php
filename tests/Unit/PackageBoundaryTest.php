@@ -39,8 +39,36 @@ function sourceFiles(): array
 it('requires nothing but PHP at runtime', function () {
     $composer = json_decode(file_get_contents(packageRoot().'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
 
-    expect(array_keys($composer['require']))->toBe(['php'])
+    // Platform requirements are PHP itself: a version, and extensions the
+    // runtime ships with. A Composer package is the thing that would change
+    // what has to be installed to deploy this, so that is what is forbidden.
+    $packages = array_values(array_filter(
+        array_keys($composer['require']),
+        fn (string $required): bool => $required !== 'php' && ! str_starts_with($required, 'ext-'),
+    ));
+
+    expect($packages)->toBe([], 'The package acquired a Composer dependency.')
         ->and($composer['require']['php'])->toBe('^8.4');
+});
+
+it('declares every extension its source actually uses', function () {
+    $composer = json_decode(file_get_contents(packageRoot().'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
+
+    // An undeclared extension is a deployment requirement nobody decided on:
+    // the install succeeds and the failure arrives later, from a socket.
+    $prefixes = ['mb_' => 'ext-mbstring'];
+
+    foreach (sourceFiles() as $file) {
+        $source = file_get_contents($file);
+
+        foreach ($prefixes as $prefix => $extension) {
+            if (str_contains($source, $prefix)) {
+                expect(array_key_exists($extension, $composer['require']))->toBeTrue(
+                    "{$file} calls {$prefix}* but composer.json does not require {$extension}.",
+                );
+            }
+        }
+    }
 });
 
 it('reaches for no runtime outside PHP itself', function (string $file) {

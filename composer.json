@@ -10,7 +10,8 @@
         "collaboration"
     ],
     "require": {
-        "php": "^8.4"
+        "php": "^8.4",
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "laravel/pint": "^1.24",
