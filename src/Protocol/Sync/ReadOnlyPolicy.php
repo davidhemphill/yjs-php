@@ -17,10 +17,11 @@ use Hemp\Yjs\Update\Update;
  * updates, and refusing all of them would break the handshake it is entitled
  * to complete.
  *
- * The distinction that matters is not whether an update arrived but whether it
- * would change anything. An update we already account for costs nothing to
- * accept and nothing to ignore; an update carrying state we do not have is the
- * peer writing to a document it may only read.
+ * For the step two that answers our question, the distinction that matters is
+ * not whether an update arrived but whether it would change anything: an
+ * update we already account for costs nothing to accept. An unprompted Update
+ * is different — nothing in the handshake obliged the peer to send one, so it
+ * is refused without inspection, exactly as Hocuspocus refuses it.
  *
  * This is a decision, not an enforcement point. Nothing here mutates state or
  * talks to a socket — the session applies the verdict, which keeps the rule
@@ -45,13 +46,22 @@ final class ReadOnlyPolicy
             return SyncAdmission::Allowed;
         }
 
-        $update = match (true) {
-            $message instanceof SyncStep2 => $message->update($limits),
-            $message instanceof SyncUpdate => $message->update($limits),
-            default => null,
-        };
+        // An unprompted update is refused without looking inside it. The
+        // step two below gets a containment check because the peer had to
+        // send it — it answers our own step one — but nothing obliged anyone
+        // to send an Update. Hocuspocus draws the same line: readSyncStep2
+        // checks the snapshot, messageYjsUpdate answers false outright.
+        if ($message instanceof SyncUpdate) {
+            return SyncAdmission::IntroducesState;
+        }
 
-        if ($update === null || $update->isEmpty()) {
+        if (! $message instanceof SyncStep2) {
+            return SyncAdmission::Redundant;
+        }
+
+        $update = $message->update($limits);
+
+        if ($update->isEmpty()) {
             return SyncAdmission::Redundant;
         }
 

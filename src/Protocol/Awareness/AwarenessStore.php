@@ -40,6 +40,7 @@ final class AwarenessStore
         $added = [];
         $updated = [];
         $removed = [];
+        $refreshed = [];
 
         foreach ($update->entries as $entry) {
             $known = $this->clients[$entry->client] ?? null;
@@ -74,6 +75,11 @@ final class AwarenessStore
                 $added[] = $entry->client;
             } elseif ($known['state'] !== $entry->state) {
                 $updated[] = $entry->client;
+            } else {
+                // The same state at a higher clock: the client announcing it
+                // is still here. Not a change, but not nothing — see the note
+                // on {@see AwarenessChange::$refreshed}.
+                $refreshed[] = $entry->client;
             }
 
             $this->clients[$entry->client] = [
@@ -83,7 +89,7 @@ final class AwarenessStore
             ];
         }
 
-        return new AwarenessChange($added, $updated, $removed);
+        return new AwarenessChange($added, $updated, $removed, $refreshed);
     }
 
     /**

@@ -57,16 +57,31 @@ describe('acceptance', function () use ($update) {
             ->and($store->knows(1))->toBeFalse();
     });
 
-    it('reports a repeated state as no change', function () use ($update) {
+    it('reports a repeated state as a refresh, not a change', function () use ($update) {
         $store = new AwarenessStore;
 
         $store->apply($update([1, 1, '{"a":1}']), now: 1000);
         $change = $store->apply($update([1, 2, '{"a":1}']), now: 1000);
 
-        // The clock advanced but the presence did not, so there is nothing
-        // worth fanning out to everyone else.
-        expect($change->isEmpty())->toBeTrue()
+        // The clock advanced but the presence did not. That is the client's
+        // heartbeat: y-protocols fires its `update` event for it and a server
+        // rebroadcasts it, or every idle cursor expires after thirty seconds.
+        expect($change->refreshed)->toBe([1])
+            ->and($change->updated)->toBe([])
+            ->and($change->added)->toBe([])
             ->and($store->clockFor(1))->toBe(2);
+    });
+
+    it('does not report a refresh for a state it rejected', function () use ($update) {
+        $store = new AwarenessStore;
+
+        $store->apply($update([1, 5, '{"a":1}']), now: 1000);
+        $change = $store->apply($update([1, 5, '{"a":1}']), now: 1000);
+
+        // Same clock, same state: y-protocols accepts nothing here and emits
+        // nothing, so neither does the store. This is what keeps a peer's
+        // restatement of someone else's presence from echoing forever.
+        expect($change->isEmpty())->toBeTrue();
     });
 
     it('reports a new client as added', function () use ($update) {

@@ -60,6 +60,19 @@ it('refuses a step2 that introduces state', function () use ($resident) {
         ->toBe(SyncAdmission::IntroducesState);
 });
 
+it('refuses an unprompted update even when it is redundant', function () use ($resident) {
+    // A step two answering our question gets the benefit of a containment
+    // check; an Update nobody asked for does not. Hocuspocus answers every
+    // read-only Update with SyncStatus(false) without opening it.
+    expect(ReadOnlyPolicy::admit(SyncUpdate::of($resident()), $resident(), DecodeLimits::trusted()))
+        ->toBe(SyncAdmission::IntroducesState);
+});
+
+it('refuses an empty unprompted update', function () use ($resident) {
+    expect(ReadOnlyPolicy::admit(new SyncUpdate(''), $resident(), DecodeLimits::trusted()))
+        ->toBe(SyncAdmission::IntroducesState);
+});
+
 it('refuses an unprompted update that introduces state', function () use ($resident) {
     $other = Update::decode(
         base64_decode(Fixtures::cases('updates')['map-any']['update'], strict: true),
